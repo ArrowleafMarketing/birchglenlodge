@@ -36,6 +36,10 @@ yarn-error.log*
 # vercel
 .vercel
 
+# staging area for the WordPress media dump — the 46 files actually used were
+# moved into public/images/; these are the unused leftovers, kept local only.
+/public/wordpress
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts
