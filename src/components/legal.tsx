@@ -1,26 +1,22 @@
 import type { ReactNode } from "react";
 import { Container } from "@/components/ui";
 
+/** Title band + long-form prose wrapper for Privacy / Terms. Clears the fixed header. */
 export function LegalShell({
   title,
-  effectiveDate,
   children,
 }: {
   title: string;
-  effectiveDate: string;
   children: ReactNode;
 }) {
   return (
     <>
-      <section className="border-b border-ink/10 bg-accent/40">
-        <Container className="py-16 sm:py-20">
-          <h1 className="font-display text-4xl font-semibold text-ink sm:text-5xl">{title}</h1>
-          <p className="mt-3 text-sm font-medium uppercase tracking-[0.16em] text-primary">
-            Effective Date: {effectiveDate}
-          </p>
+      <section className="bg-accent/40 pt-36 pb-14 sm:pt-40 sm:pb-16">
+        <Container>
+          <h1 className="h1 !text-[56px] text-ink max-[767px]:!text-[40px]">{title}</h1>
         </Container>
       </section>
-      <Container className="legal-prose max-w-3xl py-16 sm:py-20">{children}</Container>
+      <Container className="prose-body max-w-3xl py-16 text-ink/80 sm:py-20">{children}</Container>
     </>
   );
 }

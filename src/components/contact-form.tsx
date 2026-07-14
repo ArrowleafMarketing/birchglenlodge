@@ -36,23 +36,15 @@ export function ContactForm() {
   }
 
   const field =
-    "w-full rounded-xl border border-ink/15 bg-white px-4 py-3 text-sm text-ink outline-none transition-colors focus:border-primary";
+    "w-full rounded-none border border-ink/15 bg-white px-4 py-3 text-sm text-ink outline-none transition-colors focus:border-primary";
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
-      <div className="grid gap-4 sm:grid-cols-2">
-        <div>
-          <label htmlFor="name" className="mb-1.5 block text-sm font-medium text-ink">
-            Name
-          </label>
-          <input id="name" name="name" required className={field} />
-        </div>
-        <div>
-          <label htmlFor="phone" className="mb-1.5 block text-sm font-medium text-ink">
-            Phone
-          </label>
-          <input id="phone" name="phone" type="tel" className={field} />
-        </div>
+      <div>
+        <label htmlFor="name" className="mb-1.5 block text-sm font-medium text-ink">
+          Name
+        </label>
+        <input id="name" name="name" required className={field} />
       </div>
       <div>
         <label htmlFor="email" className="mb-1.5 block text-sm font-medium text-ink">
@@ -68,7 +60,7 @@ export function ContactForm() {
       </div>
       <button
         type="submit"
-        className="w-full rounded-full bg-primary px-7 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-primary-dark sm:w-auto"
+        className="w-full rounded-lg bg-primary px-7 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-secondary sm:w-auto"
       >
         Send Message
       </button>

@@ -1,98 +1,125 @@
 import type { Metadata } from "next";
-import { Container, Section, SectionHeader, Eyebrow } from "@/components/ui";
+import type { ReactNode } from "react";
+import { Container, Section, Eyebrow } from "@/components/ui";
+import { Hero } from "@/components/sections";
 import { ContactForm } from "@/components/contact-form";
+import { MapEmbed } from "@/components/embeds";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Contact Us",
   description:
-    "Get in touch with Birch Glen Lodge in Cascade, Idaho. Call, email, or send us a message and let us help plan your next mountain getaway.",
+    "Escape. Explore. Relax. Your mountain getaway awaits. Get in touch with Birch Glen Lodge in Cascade, Idaho — call, email, or send us a message.",
 };
 
-const directionsUrl =
-  "https://www.google.com/maps/search/?api=1&query=762+S+Main+St+Cascade+ID+83611";
+function MapIcon() {
+  return (
+    <svg viewBox="0 0 576 512" width="22" height="22" fill="currentColor" aria-hidden className="mt-0.5 shrink-0 text-primary">
+      <path d="M560.02 32c-1.96 0-3.98.37-5.96 1.16L384.01 96H384L212 35.28A64.252 64.252 0 0 0 191.76 32c-6.69 0-13.37 1.05-19.81 3.14L20.12 87.95A32.006 32.006 0 0 0 0 117.66v346.32C0 473.17 7.53 480 15.99 480c1.96 0 3.97-.37 5.96-1.16L192 416l172 60.71a63.98 63.98 0 0 0 40.05.15l151.83-52.81A31.996 31.996 0 0 0 576 394.34V48.02c0-9.19-7.53-16.02-15.98-16.02zM224 90.42l128 45.19v285.97l-128-45.19V90.42zM48 418.05V129.07l128-44.53v286.2l-.64.23L48 418.05zm480-35.13l-128 44.53V141.26l.64-.24L528 93.95v288.97z" />
+    </svg>
+  );
+}
+
+function EnvelopeIcon() {
+  return (
+    <svg viewBox="0 0 512 512" width="22" height="22" fill="currentColor" aria-hidden className="mt-0.5 shrink-0 text-primary">
+      <path d="M464 64H48C21.49 64 0 85.49 0 112v288c0 26.51 21.49 48 48 48h416c26.51 0 48-21.49 48-48V112c0-26.51-21.49-48-48-48zm0 48v40.805c-22.422 18.259-58.168 46.651-134.587 106.49-16.841 13.247-50.201 45.072-73.413 44.701-23.208.375-56.579-31.459-73.413-44.701C106.18 199.465 70.425 171.067 48 152.805V112h416zM48 400V214.398c22.914 18.251 55.409 43.862 104.938 82.646 21.857 17.205 60.134 55.186 103.062 54.955 42.717.231 80.509-37.199 103.053-54.947 49.528-38.783 82.032-64.401 104.947-82.653V400H48z" />
+    </svg>
+  );
+}
+
+function PhoneIcon() {
+  return (
+    <svg viewBox="0 0 320 512" width="22" height="22" fill="currentColor" aria-hidden className="mt-0.5 shrink-0 text-primary">
+      <path d="M272 0H48C21.5 0 0 21.5 0 48v416c0 26.5 21.5 48 48 48h224c26.5 0 48-21.5 48-48V48c0-26.5-21.5-48-48-48zM160 480c-17.7 0-32-14.3-32-32s14.3-32 32-32 32 14.3 32 32-14.3 32-32 32zm112-108c0 6.6-5.4 12-12 12H60c-6.6 0-12-5.4-12-12V60c0-6.6 5.4-12 12-12h200c6.6 0 12 5.4 12 12v312z" />
+    </svg>
+  );
+}
+
+function ContactItem({
+  icon,
+  href,
+  external,
+  children,
+}: {
+  icon: ReactNode;
+  href: string;
+  external?: boolean;
+  children: ReactNode;
+}) {
+  const linkProps = external ? { target: "_blank", rel: "noopener noreferrer" } : {};
+  return (
+    <li>
+      <a
+        href={href}
+        {...linkProps}
+        className="flex items-start gap-4 text-lg text-ink transition-colors hover:text-primary"
+      >
+        {icon}
+        <span>{children}</span>
+      </a>
+    </li>
+  );
+}
 
 export default function ContactPage() {
   return (
     <>
-      <section className="border-b border-ink/10 bg-accent/40">
-        <Container className="py-16 sm:py-20">
-          <SectionHeader
-            eyebrow="Contact Us"
-            title="Your Mountain Getaway Awaits"
-            intro="Snuggled in the picturesque mountains north of Boise, Birch Glen Lodge offers a rare blend of privacy, relaxation, and entertainment. We'd love to hear from you."
-          />
-        </Container>
-      </section>
+      {/* 1. Hero */}
+      <Hero
+        image="/images/BIRCH-33.jpg"
+        imageAlt="Birch Glen Lodge in Cascade, Idaho"
+        title="Contact Us"
+        subtitle="Escape. Explore. Relax. Your Mountain Getaway Awaits"
+        priority
+      />
 
+      {/* 2. Info + Form — 2 column */}
       <Section>
-        <Container className="grid gap-12 lg:grid-cols-[1fr_1.2fr]">
+        <Container className="grid gap-12 lg:grid-cols-2">
+          {/* Left: contact info */}
           <div>
-            <Eyebrow>Get In Touch</Eyebrow>
-            <h2 className="font-display mt-3 text-3xl font-semibold text-ink">
-              Let Us Help You On Your Next Adventure
-            </h2>
+            <Eyebrow>Get in touch</Eyebrow>
+            <h2 className="h2 mt-3 text-ink">We&#8217;d Love to Hear From You</h2>
 
-            <ul className="mt-8 space-y-6">
-              <ContactRow label="Phone">
-                <a href={site.phonePrimaryHref} className="hover:text-primary">
-                  {site.phonePrimary}
-                </a>
-                <span className="px-2 text-ink/30">·</span>
-                <a href={site.phoneSecondaryHref} className="hover:text-primary">
-                  {site.phoneSecondary}
-                </a>
-              </ContactRow>
-              <ContactRow label="Email">
-                <a href={`mailto:${site.email}`} className="hover:text-primary">
-                  {site.email}
-                </a>
-              </ContactRow>
-              <ContactRow label="Address">
-                {site.address.street}, {site.address.city}, {site.address.state}{" "}
-                {site.address.zip}
-                <br />
-                <a
-                  href={directionsUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-sm font-semibold text-primary hover:text-primary-dark"
-                >
-                  Get Directions →
-                </a>
-              </ContactRow>
+            <ul className="mt-8 space-y-5">
+              <ContactItem icon={<MapIcon />} href={site.mapUrl} external>
+                {site.address.contactList}
+              </ContactItem>
+              <ContactItem icon={<EnvelopeIcon />} href={`mailto:${site.email}`}>
+                {site.email}
+              </ContactItem>
+              <ContactItem icon={<PhoneIcon />} href={site.phoneSecondaryHref}>
+                {site.phoneSecondary}
+              </ContactItem>
             </ul>
-
-            <a
-              href={site.bookingUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-10 inline-flex rounded-full bg-primary px-7 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-primary-dark"
-            >
-              Book A Room
-            </a>
           </div>
 
-          <div className="rounded-card bg-white p-8 shadow-sm ring-1 ring-ink/5 sm:p-10">
-            <h3 className="font-display text-2xl font-semibold text-ink">Get In Touch Today!</h3>
-            <p className="mt-2 text-sm text-ink-soft">
-              Send us a message and we&apos;ll get back to you soon.
+          {/* Right: intro + form */}
+          <div>
+            <Eyebrow>Let Us Help You On Your Next Adventure</Eyebrow>
+            <p className="mt-5 text-lg leading-relaxed text-ink/80">
+              Right next to Kelly&#8217;s Whitewater Park, Birch Glen Lodge is snuggled in the
+              picturesque mountains north of Boise. We offer a rare blend of privacy, relaxation,
+              and entertainment.
             </p>
-            <div className="mt-6">
+            <p className="mt-5 text-lg leading-relaxed text-ink/80">
+              Birch Glen Lodge is great for romantic weekends, family getaways, corporate retreats,
+              reunions or just to get away from the hustle and bustle of the city. Birch Glen Lodge
+              is a can&#8217;t miss experience!
+            </p>
+
+            <div className="mt-8">
               <ContactForm />
             </div>
           </div>
         </Container>
       </Section>
-    </>
-  );
-}
 
-function ContactRow({ label, children }: { label: string; children: React.ReactNode }) {
-  return (
-    <li>
-      <p className="text-sm font-semibold uppercase tracking-[0.14em] text-primary">{label}</p>
-      <p className="mt-1.5 text-lg text-ink">{children}</p>
-    </li>
+      {/* 3. Google Map — full width */}
+      <section>
+        <MapEmbed />
+      </section>
+    </>
   );
 }

@@ -1,154 +1,168 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import { Container, Section, SectionHeader, Eyebrow } from "@/components/ui";
-import { CtaBand } from "@/components/sections";
-import { rooms, roomIncludes, lodgeAmenities, groupDiscount } from "@/lib/content";
+import {
+  Container,
+  Section,
+  SectionHeader,
+  ButtonAnchor,
+  ArrowRight,
+} from "@/components/ui";
+import { Hero } from "@/components/sections";
+import { CardCarousel } from "@/components/card-carousel";
+import { roomsCarousel, roomIncludes, lodgeAmenities, activityColumns } from "@/lib/content";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Our Rooms",
+  title: "Rooms",
   description:
-    "Comfort for your adventure in the mountains. Explore Birch Glen Lodge's room types — Royal King, Deluxe Double, Single Queen, Triple, and the Private Upstairs Suite.",
+    "Comfort for your adventure in the mountains. Explore our rooms — Royal King, Deluxe Double, Single Queen, Triple, and the Private Upstairs Suite — each with a mini fridge, microwave, air conditioning/heater, coffee maker, and television/cable/wifi.",
 };
+
+const roomCards = roomsCarousel.map((room) => ({
+  image: room.image,
+  hover: room.hover,
+  title: room.name,
+  alt: room.name,
+}));
 
 export default function RoomsPage() {
   return (
     <>
-      <PageHeroRooms />
+      {/* 1. Hero / intro title band */}
+      <Hero
+        image="/images/Birch-166-scaled.jpg"
+        imageAlt="Birch Glen Lodge in Cascade, Idaho"
+        title="Our Rooms"
+        subtitle="Comfort For Your Adventure In The Mountains"
+        priority
+      />
 
+      {/* 2. Explore our rooms */}
+      <Section>
+        <Container>
+          <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
+            <SectionHeader eyebrow="Picture Your Stay" title="Explore our rooms" />
+            <ButtonAnchor
+              href={site.bookingUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="shrink-0"
+            >
+              Book Now <ArrowRight />
+            </ButtonAnchor>
+          </div>
+          <div className="mt-12">
+            <CardCarousel items={roomCards} />
+          </div>
+        </Container>
+      </Section>
+
+      {/* 3. Room & Lodge Features */}
+      <Section className="pt-0">
+        <Container>
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            <div className="relative aspect-[851/1280] overflow-hidden">
+              <Image
+                src="/images/BIRCH-80.jpg"
+                alt="A guest room at Birch Glen Lodge"
+                fill
+                sizes="(min-width:1024px) 25vw, (min-width:640px) 50vw, 100vw"
+                className="object-cover"
+              />
+            </div>
+            <div className="flex flex-col justify-center bg-accent p-8">
+              <h3 className="h3 text-ink">Each Room Includes:</h3>
+              <ul className="mt-6 space-y-3">
+                {roomIncludes.map((item) => (
+                  <li key={item} className="flex items-start gap-3 text-lg text-ink">
+                    <Check />
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="relative aspect-[851/1280] overflow-hidden">
+              <Image
+                src="/images/BIRCH-72.jpg"
+                alt="Lodge amenities at Birch Glen Lodge"
+                fill
+                sizes="(min-width:1024px) 25vw, (min-width:640px) 50vw, 100vw"
+                className="object-cover"
+              />
+            </div>
+            <div className="flex flex-col justify-center bg-accent p-8">
+              <h3 className="h3 text-ink">Lodge Amenities:</h3>
+              <ul className="mt-6 space-y-3">
+                {lodgeAmenities.map((item) => (
+                  <li key={item} className="flex items-start gap-3 text-lg text-ink">
+                    <Check />
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </Container>
+      </Section>
+
+      {/* 4. Group Bookings */}
       <Section>
         <Container>
           <SectionHeader
-            align="center"
-            eyebrow="Picture Your Stay"
-            title="Comfort for Your Adventure in the Mountains"
+            eyebrow="Big Group? We have you covered!"
+            title="Group Bookings"
+            intro="Discounts available for groups of 5+ rooms booked at a time. Please call our main number and ask to speak with a manager to plan your next group booking! "
           />
+        </Container>
+      </Section>
 
-          <div className="mt-14 space-y-8">
-            {rooms.map((room, i) => (
-              <div
-                key={room.name}
-                className="grid items-center gap-6 overflow-hidden rounded-card bg-white shadow-sm ring-1 ring-ink/5 lg:grid-cols-2"
-              >
-                <div
-                  className={`grid grid-cols-2 gap-1 ${i % 2 === 1 ? "lg:order-2" : ""}`}
-                >
-                  {room.images.map((src, idx) => (
-                    <div key={src} className="relative aspect-[4/3] overflow-hidden">
-                      <Image
-                        src={src}
-                        alt={`${room.name} at Birch Glen Lodge, photo ${idx + 1}`}
-                        fill
-                        sizes="(min-width: 1024px) 25vw, 50vw"
-                        className="object-cover"
-                      />
-                    </div>
-                  ))}
-                </div>
-                <div className="px-8 py-8 lg:px-10">
-                  <Eyebrow>Room</Eyebrow>
-                  <h3 className="font-display mt-2 text-3xl font-semibold text-ink">{room.name}</h3>
-                  <ul className="mt-5 flex flex-wrap gap-2">
-                    {roomIncludes.map((item) => (
-                      <li
-                        key={item}
-                        className="rounded-full bg-accent/50 px-3.5 py-1.5 text-xs font-medium text-primary-dark"
-                      >
-                        {item}
-                      </li>
-                    ))}
-                  </ul>
-                  <a
-                    href={site.bookingUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="mt-7 inline-flex rounded-full bg-primary px-7 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-primary-dark"
-                  >
-                    Book Now
-                  </a>
-                </div>
-              </div>
+      {/* 5. Cascade. A Recreational Paradise */}
+      <Section className="pt-0">
+        <Container>
+          <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
+            <SectionHeader
+              eyebrow="Your Guide To The Outdoors"
+              title="Cascade. A Recreational Paradise"
+            />
+            <ButtonAnchor
+              href={site.bookingUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="shrink-0"
+            >
+              Book Today <ArrowRight />
+            </ButtonAnchor>
+          </div>
+          <div className="mt-12 grid gap-x-8 gap-y-3 sm:grid-cols-3">
+            {activityColumns.map((column, i) => (
+              <ul key={i} className="space-y-3">
+                {column.map((activity) => (
+                  <li key={activity} className="flex items-start gap-3 text-lg text-ink">
+                    <Check />
+                    <span>{activity}</span>
+                  </li>
+                ))}
+              </ul>
             ))}
           </div>
         </Container>
       </Section>
-
-      {/* Every room includes */}
-      <Section className="bg-accent/40">
-        <Container className="grid gap-12 lg:grid-cols-2">
-          <div>
-            <SectionHeader eyebrow="In Every Room" title="Each Room Includes" />
-            <ul className="mt-8 space-y-3">
-              {roomIncludes.map((item) => (
-                <li key={item} className="flex items-center gap-3 text-lg text-ink">
-                  <Check /> {item}
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div>
-            <SectionHeader eyebrow="On The Property" title="Lodge Amenities" />
-            <ul className="mt-8 space-y-3">
-              {lodgeAmenities.map((item) => (
-                <li key={item} className="flex items-center gap-3 text-lg text-ink">
-                  <Check /> {item}
-                </li>
-              ))}
-            </ul>
-          </div>
-        </Container>
-      </Section>
-
-      {/* Group discount */}
-      <Section>
-        <Container className="max-w-3xl text-center">
-          <Eyebrow>Traveling Together?</Eyebrow>
-          <h2 className="font-display mt-3 text-3xl font-semibold text-ink sm:text-4xl">
-            Group Bookings
-          </h2>
-          <p className="mt-5 text-lg leading-relaxed text-ink-soft">{groupDiscount}</p>
-        </Container>
-      </Section>
-
-      <CtaBand title="Reserve Your Room Today" />
     </>
   );
 }
 
-function PageHeroRooms() {
-  return (
-    <section className="relative flex min-h-[46vh] items-center overflow-hidden bg-primary-dark">
-      <Image
-        src="/images/BIRCH-63.jpg"
-        alt="A guest room at Birch Glen Lodge"
-        fill
-        priority
-        sizes="100vw"
-        className="object-cover opacity-70"
-      />
-      <div className="absolute inset-0 bg-gradient-to-b from-ink/50 via-ink/30 to-ink/60" />
-      <Container className="relative py-24 text-center">
-        <span className="eyebrow text-accent">Our Rooms</span>
-        <h1 className="font-display mx-auto mt-4 max-w-3xl text-4xl font-semibold text-white sm:text-5xl md:text-6xl">
-          Rest Well Between Adventures
-        </h1>
-      </Container>
-    </section>
-  );
-}
-
+/** Filled check-circle, matching the live site's FontAwesome check icon. */
 function Check() {
   return (
     <svg
-      width="22"
-      height="22"
-      viewBox="0 0 24 24"
-      fill="none"
+      width="20"
+      height="20"
+      viewBox="0 0 512 512"
+      fill="currentColor"
       aria-hidden
-      className="shrink-0 text-primary"
+      className="mt-1 shrink-0 text-primary"
     >
-      <circle cx="12" cy="12" r="10" fill="currentColor" opacity="0.12" />
-      <path d="M8 12.5l2.5 2.5L16 9" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M504 256c0 136.967-111.033 248-248 248S8 392.967 8 256 119.033 8 256 8s248 111.033 248 248zM227.314 387.314l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.249-16.379-6.249-22.628 0L216 308.118l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.249 16.379 6.249 22.628.001z" />
     </svg>
   );
 }

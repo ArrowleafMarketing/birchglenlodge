@@ -1,79 +1,71 @@
 import Image from "next/image";
-import { Container } from "@/components/ui";
-import { site } from "@/lib/site";
+import type { ReactNode } from "react";
+import { Container, cx } from "@/components/ui";
 
-export function PageHero({
+/**
+ * Full-bleed hero with a background photo + dark overlay and centered content.
+ * The site header is fixed + transparent, so heroes pad the top to clear it.
+ * `tall` = the home hero (full viewport); default = interior page title band.
+ */
+export function Hero({
+  image,
+  imageAlt,
   eyebrow,
   title,
   subtitle,
-  image,
-  imageAlt,
+  children,
+  tall = false,
+  priority = false,
 }: {
-  eyebrow?: string;
-  title: string;
-  subtitle?: string;
   image: string;
   imageAlt: string;
+  eyebrow?: string;
+  title: ReactNode;
+  subtitle?: ReactNode;
+  children?: ReactNode;
+  tall?: boolean;
+  priority?: boolean;
 }) {
   return (
-    <section className="relative flex min-h-[46vh] items-center overflow-hidden bg-primary-dark">
-      <Image
-        src={image}
-        alt={imageAlt}
-        fill
-        priority
-        sizes="100vw"
-        className="object-cover opacity-70"
-      />
-      <div className="absolute inset-0 bg-gradient-to-b from-ink/50 via-ink/30 to-ink/60" />
-      <Container className="relative py-24 text-center">
-        {eyebrow ? (
-          <span className="eyebrow text-accent">{eyebrow}</span>
-        ) : null}
-        <h1 className="font-display mx-auto mt-4 max-w-3xl text-4xl font-semibold text-white sm:text-5xl md:text-6xl">
+    <section
+      className={cx(
+        "relative flex items-center justify-center overflow-hidden",
+        tall ? "min-h-screen" : "min-h-[58vh]",
+      )}
+    >
+      <Image src={image} alt={imageAlt} fill priority={priority} sizes="100vw" className="object-cover" />
+      <div className="absolute inset-0 bg-ink/40" />
+      <Container className={cx("relative text-center", tall ? "pt-40 pb-24" : "pt-44 pb-20")}>
+        {eyebrow ? <p className="eyebrow !text-accent">{eyebrow}</p> : null}
+        <h1 className={cx("mx-auto max-w-4xl text-white", tall ? "h1" : "h1 !text-[64px] max-[1024px]:!text-[52px] max-[767px]:!text-[40px]")}>
           {title}
         </h1>
         {subtitle ? (
-          <p className="mx-auto mt-5 max-w-2xl text-lg text-white/85">{subtitle}</p>
+          <div className="mx-auto mt-5 max-w-2xl text-lg text-white/90 sm:text-xl">{subtitle}</div>
         ) : null}
+        {children ? <div className="mt-9 flex flex-col items-center justify-center gap-4 sm:flex-row">{children}</div> : null}
       </Container>
     </section>
   );
 }
 
-export function CtaBand({
-  eyebrow = "Get In Touch Today!",
-  title = "Escape. Explore. Relax.",
+/** Full-width section with a background photo + overlay (Home feature/CTA bands). */
+export function BgSection({
+  image,
+  overlay = "bg-ink/55",
+  className,
+  children,
 }: {
-  eyebrow?: string;
-  title?: string;
+  image: string;
+  overlay?: string;
+  className?: string;
+  children: ReactNode;
 }) {
   return (
-    <section className="bg-secondary">
-      <Container className="flex flex-col items-center gap-8 py-16 text-center md:flex-row md:justify-between md:text-left">
-        <div>
-          <span className="eyebrow text-accent">{eyebrow}</span>
-          <h2 className="font-display mt-3 text-3xl font-semibold text-white sm:text-4xl">
-            {title}
-          </h2>
-        </div>
-        <div className="flex flex-col gap-3 sm:flex-row">
-          <a
-            href={site.bookingUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="rounded-full bg-cream px-7 py-3.5 text-sm font-semibold text-secondary transition-colors hover:bg-white"
-          >
-            Book A Room
-          </a>
-          <a
-            href={site.phonePrimaryHref}
-            className="rounded-full border border-white/40 px-7 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-white/10"
-          >
-            Give Us A Call
-          </a>
-        </div>
-      </Container>
+    <section className={cx("relative overflow-hidden", className)}>
+      <Image src={image} alt="" fill sizes="100vw" className="object-cover" />
+      <div className={cx("absolute inset-0", overlay)} />
+      <div className="relative">{children}</div>
     </section>
   );
 }
