@@ -9,7 +9,7 @@ import {
   ArrowRight,
 } from "@/components/ui";
 import { Hero, BgSection } from "@/components/sections";
-import { CardCarousel } from "@/components/card-carousel";
+import { RoomsMarquee } from "@/components/rooms-marquee";
 import { Accordion } from "@/components/accordion";
 import { TestimonialSlider } from "@/components/testimonial-slider";
 import { NewsletterEmbed } from "@/components/embeds";
@@ -118,8 +118,8 @@ export default function HomePage() {
         </Container>
       </Section>
 
-      {/* 4. Homestyle Comfort — Inside or Outside (image left, text right) */}
-      <Section>
+      {/* 4. Homestyle Comfort — Inside or Outside (dark band, image left, text right) */}
+      <Section className="bg-ink text-white">
         <Container className="grid items-center gap-12 lg:grid-cols-2">
           <div className="relative aspect-[3/2] w-full overflow-hidden lg:order-1 lg:aspect-auto lg:h-full lg:min-h-[440px]">
             <Image
@@ -131,9 +131,9 @@ export default function HomePage() {
             />
           </div>
           <div className="lg:order-2">
-            <Eyebrow>Homestyle Comfort</Eyebrow>
-            <h2 className="h2 mt-4 text-ink">Inside or Outside</h2>
-            <p className="mt-6 text-lg leading-relaxed text-ink/80">
+            <Eyebrow className="!text-accent">Homestyle Comfort</Eyebrow>
+            <h2 className="h2 mt-4 text-white">Inside or Outside</h2>
+            <p className="mt-6 text-lg leading-relaxed text-white/80">
               You can choose between the peace and quiet of your room or exploring the wide range of
               activities at your doorstep. Rather be inside? Come relax in our lodge with
               accommodations that range from pool tables, sitting areas, large screen TVs, and card
@@ -156,22 +156,14 @@ export default function HomePage() {
             </ButtonLink>
           </div>
           <div className="mt-12">
-            <CardCarousel
-              items={homeRoomCards.map((room) => ({
-                image: room.image,
-                title: room.name,
-                href: "/rooms",
-                alt: room.name,
-              }))}
-              perView={2}
-            />
+            <RoomsMarquee items={homeRoomCards} />
           </div>
         </Container>
       </Section>
 
       {/* 6. Groups & Events (2-col) */}
       <Section className="bg-cream">
-        <Container className="grid items-center gap-12 lg:grid-cols-2">
+        <Container className="grid items-start gap-12 lg:grid-cols-2">
           <div>
             <SectionHeader
               eyebrow="Who Comes To The Birch Glen?"
@@ -187,7 +179,8 @@ export default function HomePage() {
               Book A Stay
             </ButtonAnchor>
           </div>
-          <div>
+          {/* Reserve a fixed height so opening/closing panels doesn't reflow the section */}
+          <div className="min-h-[620px] sm:min-h-[540px]">
             <Accordion items={events} />
           </div>
         </Container>

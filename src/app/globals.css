@@ -65,6 +65,18 @@ body {
   .h5 { font-size: 20px; }
 }
 
+/* Continuously shifting rooms carousel (home "Explore our rooms") */
+@keyframes rooms-marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.rooms-marquee-track {
+  animation: rooms-marquee 40s linear infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .rooms-marquee-track { animation: none; }
+}
+
 /* Eyebrow / kicker (the h6-style label above section titles) */
 .eyebrow {
   font-weight: 600;
