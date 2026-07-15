@@ -9,7 +9,7 @@ import {
   ArrowRight,
 } from "@/components/ui";
 import { Hero, BgSection } from "@/components/sections";
-import { RoomsMarquee } from "@/components/rooms-marquee";
+import { RoomsCarousel } from "@/components/rooms-marquee";
 import { Accordion } from "@/components/accordion";
 import { TestimonialSlider } from "@/components/testimonial-slider";
 import { NewsletterEmbed } from "@/components/embeds";
@@ -156,7 +156,7 @@ export default function HomePage() {
             </ButtonLink>
           </div>
           <div className="mt-12">
-            <RoomsMarquee items={homeRoomCards} />
+            <RoomsCarousel items={homeRoomCards} />
           </div>
         </Container>
       </Section>
