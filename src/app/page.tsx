@@ -92,31 +92,58 @@ export default function HomePage() {
         </Container>
       </Section>
 
-      {/* 3. Why Choose Us — World's Biggest Perch */}
-      <BgSection image="/images/BIRCH-43.jpg">
-        <Container className="py-20 sm:py-28">
-          <SectionHeader
-            align="center"
-            invert
-            eyebrow="Why Choose Us?"
-            title="Home of the Worlds Biggest Perch"
-            intro="The biggest Perch in the world live right here in Lake Cascade. During the winter, ice-fishing is the community’s hottest sport. Documented world-record caliber Perch are caught on this lake weekly. Catch and clean your trophies onsite. During the winter season we have an indoor DIY fish cleaning and processing room in the back of the lodge. It’s free and open to all guests."
-          />
+      {/* 3. Why Choose Us — World's Biggest Perch (text left, image right) */}
+      <Section>
+        <Container className="grid items-center gap-12 lg:grid-cols-2">
+          <div>
+            <Eyebrow>Why Choose Us?</Eyebrow>
+            <h2 className="h2 mt-4 text-ink">Home of the Worlds Biggest Perch</h2>
+            <p className="mt-6 text-lg leading-relaxed text-ink/80">
+              The biggest Perch in the world live right here in Lake Cascade. During the winter,
+              ice-fishing is the community&rsquo;s hottest sport. Documented world-record caliber
+              Perch are caught on this lake weekly. Catch and clean your trophies onsite. During the
+              winter season we have an indoor DIY fish cleaning and processing room in the back of the
+              lodge. It&rsquo;s free and open to all guests.
+            </p>
+          </div>
+          <div className="relative aspect-[3/2] w-full overflow-hidden lg:aspect-auto lg:h-full lg:min-h-[440px]">
+            <Image
+              src="/images/BIRCH-43.jpg"
+              alt="Aerial view of Birch Glen Lodge beside Lake Cascade"
+              fill
+              sizes="(min-width:1024px) 50vw, 100vw"
+              className="object-cover"
+            />
+          </div>
         </Container>
-      </BgSection>
+      </Section>
 
-      {/* 4. Homestyle Comfort — Inside or Outside */}
-      <BgSection image="/images/BIRCH-71.jpg">
-        <Container className="py-20 sm:py-28">
-          <SectionHeader
-            align="center"
-            invert
-            eyebrow="Homestyle Comfort"
-            title="Inside or Outside"
-            intro="You can choose between the peace and quiet of your room or exploring the wide range of activities at your doorstep. Rather be inside? Come relax in our lodge with accommodations that range from pool tables, sitting areas, large screen TVs, and card tables. Outside, you will find a barbecue area, a fire pit with plenty of seating, and a large grassy area to make any gathering a success. We view our guests as family and want you to feel as comfortable here as you do at home."
-          />
+      {/* 4. Homestyle Comfort — Inside or Outside (image left, text right) */}
+      <Section>
+        <Container className="grid items-center gap-12 lg:grid-cols-2">
+          <div className="relative aspect-[3/2] w-full overflow-hidden lg:order-1 lg:aspect-auto lg:h-full lg:min-h-[440px]">
+            <Image
+              src="/images/BIRCH-71.jpg"
+              alt="Guests relaxing at Birch Glen Lodge"
+              fill
+              sizes="(min-width:1024px) 50vw, 100vw"
+              className="object-cover"
+            />
+          </div>
+          <div className="lg:order-2">
+            <Eyebrow>Homestyle Comfort</Eyebrow>
+            <h2 className="h2 mt-4 text-ink">Inside or Outside</h2>
+            <p className="mt-6 text-lg leading-relaxed text-ink/80">
+              You can choose between the peace and quiet of your room or exploring the wide range of
+              activities at your doorstep. Rather be inside? Come relax in our lodge with
+              accommodations that range from pool tables, sitting areas, large screen TVs, and card
+              tables. Outside, you will find a barbecue area, a fire pit with plenty of seating, and a
+              large grassy area to make any gathering a success. We view our guests as family and want
+              you to feel as comfortable here as you do at home.
+            </p>
+          </div>
         </Container>
-      </BgSection>
+      </Section>
 
       {/* 5. Explore our rooms */}
       <Section>
