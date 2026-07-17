@@ -29,13 +29,15 @@ export function Hero({
   return (
     <section
       className={cx(
-        "relative flex items-center justify-center overflow-hidden",
-        tall ? "min-h-screen" : "min-h-[58vh]",
+        "relative flex justify-center overflow-hidden",
+        // Home (tall) hero anchors content in the upper half (over the sky/clouds);
+        // interior heroes stay vertically centered.
+        tall ? "min-h-screen items-start" : "min-h-[58vh] items-center",
       )}
     >
       <Image src={image} alt={imageAlt} fill priority={priority} sizes="100vw" className="object-cover" />
       <div className="absolute inset-0 bg-ink/40" />
-      <Container className={cx("relative text-center", tall ? "pt-40 pb-24" : "pt-44 pb-20")}>
+      <Container className={cx("relative text-center", tall ? "pt-[15vh] pb-24" : "pt-44 pb-20")}>
         {eyebrow ? <p className="eyebrow !text-accent">{eyebrow}</p> : null}
         <h1 className={cx("mx-auto max-w-4xl text-white", tall ? "h1" : "h1 !text-[64px] max-[1024px]:!text-[52px] max-[767px]:!text-[40px]")}>
           {title}
