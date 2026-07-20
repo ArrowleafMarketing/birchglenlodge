@@ -1,8 +1,10 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Manrope, Lora } from "next/font/google";
 import "./globals.css";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
+import { site } from "@/lib/site";
+import { JsonLd, siteJsonLd } from "@/lib/seo";
 
 // Manrope = body/UI; Lora = serif display headings (matches the live site).
 const manrope = Manrope({
@@ -17,22 +19,80 @@ const lora = Lora({
   weight: ["400", "500", "600", "700"],
 });
 
+// Home/default description. Individual pages override the title + description via
+// pageMetadata(); this is the fallback and the home page's own copy.
+const HOME_TITLE = "Birch Glen Lodge & Motel | Lodging in Cascade, Idaho";
+const HOME_DESCRIPTION =
+  "Established in 1968, Birch Glen Lodge & Motel is a serene mountain getaway in Cascade, Idaho — steps from Lake Cascade, next to Kelly's Whitewater Park.";
+
 export const metadata: Metadata = {
-  metadataBase: new URL("https://thebirchglenlodge.com"),
+  metadataBase: new URL(site.url),
   title: {
-    default: "Birch Glen Lodge & Motel | A Serene Mountain Getaway in Cascade, Idaho",
-    template: "%s - Birch Glen Lodge",
+    default: HOME_TITLE,
+    // Fallback suffix for any page that sets a bare string title. Pages built
+    // with pageMetadata() use title.absolute, so this rarely applies.
+    template: "%s | Birch Glen Lodge",
   },
-  description:
-    "Established in 1968, Birch Glen Lodge & Motel is a serene mountain getaway in Cascade, Idaho — steps from Lake Cascade and next door to Kelly's Whitewater Park.",
+  description: HOME_DESCRIPTION,
+  applicationName: site.fullName,
+  authors: [{ name: site.fullName }],
+  creator: site.fullName,
+  publisher: site.fullName,
+  keywords: [
+    "Birch Glen Lodge",
+    "Birch Glen Lodge & Motel",
+    "Cascade Idaho lodging",
+    "Cascade Idaho motel",
+    "Lake Cascade lodging",
+    "hotel near Lake Cascade",
+    "Kelly's Whitewater Park lodging",
+    "Valley County Idaho lodging",
+    "ice fishing Cascade Idaho",
+    "mountain getaway Idaho",
+  ],
+  // Explicit tel:/mailto links are used throughout, so suppress iOS auto-linking
+  // of plain-text numbers/addresses (avoids inconsistent styling).
+  formatDetection: { telephone: false, address: false, email: false },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
   openGraph: {
-    title: "Birch Glen Lodge & Motel",
-    description:
-      "A serene mountain getaway in Cascade, Idaho — steps from Lake Cascade and next door to Kelly's Whitewater Park.",
-    url: "https://thebirchglenlodge.com",
-    siteName: "Birch Glen Lodge",
     type: "website",
+    siteName: site.name,
+    locale: "en_US",
+    url: `${site.url}/`,
+    title: HOME_TITLE,
+    description: HOME_DESCRIPTION,
+    images: [
+      {
+        url: `${site.url}/og-image.jpg`,
+        width: 1200,
+        height: 630,
+        alt: "Aerial view of Birch Glen Lodge & Motel beside Lake Cascade in Cascade, Idaho",
+      },
+    ],
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "Birch Glen Lodge & Motel",
+    description: HOME_DESCRIPTION,
+    images: [`${site.url}/og-image.jpg`],
+  },
+  // Google Search Console / Bing verification tokens can be added here once issued:
+  // verification: { google: "…", other: { "msvalidate.01": "…" } },
+};
+
+export const viewport: Viewport = {
+  themeColor: "#af6339",
+  colorScheme: "light",
 };
 
 export default function RootLayout({
@@ -44,6 +104,15 @@ export default function RootLayout({
     <html lang="en" className={`${manrope.variable} ${lora.variable} h-full`}>
       {/* Header is fixed + transparent, so content sits underneath it from the top. */}
       <body className="min-h-full flex flex-col bg-white text-ink">
+        {/* Site-wide structured data: the LodgingBusiness/Motel entity + WebSite,
+            referenced by @id from per-page breadcrumb/room/gallery nodes. */}
+        <JsonLd data={siteJsonLd()} />
+        {/* Safety net: if JS is disabled, scroll-reveal elements can't be un-hidden,
+            so force them visible. (Motion-OK users with JS get the animations;
+            reduced-motion users are covered by the media query in globals.css.) */}
+        <noscript>
+          <style>{`.reveal,.reveal-img{opacity:1!important;transform:none!important}`}</style>
+        </noscript>
         <SiteHeader />
         <main className="flex-1">{children}</main>
         <SiteFooter />

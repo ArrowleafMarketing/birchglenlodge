@@ -103,13 +103,13 @@ export function RoomsCarousel({ items }: { items: RoomCard[] }) {
                 <div className="relative aspect-[3/2] w-full overflow-hidden">
                   <Image
                     src={room.image}
-                    alt={room.name}
+                    alt={`${room.name} room at Birch Glen Lodge in Cascade, Idaho`}
                     fill
                     sizes="(min-width:1024px) 33vw, (min-width:640px) 50vw, 100vw"
                     className="object-cover"
                   />
                 </div>
-                <h5 className="h5 mt-4 text-center text-ink">{room.name}</h5>
+                <h3 className="h5 mt-4 text-center text-ink">{room.name}</h3>
               </Link>
             </div>
           ))}

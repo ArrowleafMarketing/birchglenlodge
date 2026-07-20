@@ -26,6 +26,72 @@
 
 html {
   scroll-behavior: smooth;
+  /* Clip the brief horizontal overshoot of reveal-image scaling at the root so
+     it never produces a horizontal scrollbar (esp. on mobile). */
+  overflow-x: clip;
+}
+
+/*
+  Scroll-into-view reveal system — one small vocabulary used site-wide.
+  Text/blocks fade up a short distance; images fade + settle from a gentle
+  scale. Elements start hidden and are shown once (data-shown flips to "true"
+  via the <Reveal> IntersectionObserver, then it stops observing). Staggering
+  is driven by inline transition-delay. Everything is disabled for users who
+  prefer reduced motion.
+*/
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 600ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 600ms cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+.reveal[data-shown="true"] {
+  opacity: 1;
+  transform: none;
+}
+.reveal-img {
+  opacity: 0;
+  transform: scale(1.03);
+  transition: opacity 700ms ease-out, transform 700ms ease-out;
+  will-change: opacity, transform;
+}
+.reveal-img[data-shown="true"] {
+  opacity: 1;
+  transform: none;
+}
+
+/* Hero content: a subtle one-time fade-up on page load (opacity-led). */
+@keyframes heroIn {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.hero-enter > * {
+  opacity: 0;
+  animation: heroIn 700ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+.hero-enter > *:nth-child(1) { animation-delay: 80ms; }
+.hero-enter > *:nth-child(2) { animation-delay: 200ms; }
+.hero-enter > *:nth-child(3) { animation-delay: 320ms; }
+.hero-enter > *:nth-child(4) { animation-delay: 440ms; }
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal,
+  .reveal-img {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+  .hero-enter > * {
+    opacity: 1;
+    animation: none;
+  }
 }
 
 body {
@@ -35,6 +101,10 @@ body {
   font-size: 18px;
   line-height: 1.65;
   -webkit-font-smoothing: antialiased;
+  /* Contain the brief scale/translate of reveal animations so they never create
+     a horizontal scrollbar on mobile. `clip` (not `hidden`) avoids turning the
+     body into a scroll container, which would break scroll-position reads. */
+  overflow-x: clip;
 }
 
 /*

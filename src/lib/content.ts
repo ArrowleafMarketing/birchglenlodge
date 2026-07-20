@@ -87,22 +87,70 @@ export const activityColumns = [
 
 // About page amenities feature row (image + text card pairs)
 export const aboutAmenities = [
-  { image: "/images/5.jpg", title: "Amenities", items: ["Game Room"] },
-  { image: "/images/6.jpg", title: "Feel Like Being Outside?", items: ["Firepit", "BBQ Area"] },
+  {
+    image: "/images/5.jpg",
+    alt: "Game and laundry room with pool table, foosball, air hockey and washer-dryer at Birch Glen Lodge",
+    title: "Amenities",
+    items: ["Game Room"],
+  },
+  {
+    image: "/images/6.jpg",
+    alt: "Outdoor firepit ringed by chairs under pine trees at Birch Glen Lodge in Cascade, Idaho",
+    title: "Feel Like Being Outside?",
+    items: ["Firepit", "BBQ Area"],
+  },
 ];
 
 // Guide To Cascade cards
 export const guideCards = [
-  { title: "Trails", image: "/images/2.jpg", href: "/trails" },
+  {
+    title: "Trails",
+    image: "/images/2.jpg",
+    alt: "Mountain hiking trail through an alpine meadow with pines and rocky peaks near Cascade, Idaho",
+    href: "/trails",
+  },
   {
     title: "Rivers, Lakes, Hot Springs",
     image: "/images/1.jpg",
+    alt: "Natural rock-lined hot spring pool beside a creek with a footbridge near Cascade, Idaho",
     href: "/rivers-lakes-hot-springs",
   },
 ];
 
-// Gallery — exact DOM order from the live site (NOT strictly numeric)
-export const galleryImages = [
-  40, 43, 45, 47, 48, 50, 51, 53, 54, 55, 58, 59, 61, 62, 63, 64, 65, 66, 67, 70, 72, 75, 84, 87,
-  79, 78, 97, 99, 100, 95, 92, 91, 107,
-].map((n) => `/images/BIRCH-${n}.jpg`);
+// Gallery — exact DOM order from the live site (NOT strictly numeric).
+// Each image carries descriptive alt text for accessibility + image SEO.
+export const galleryImages: { src: string; alt: string }[] = [
+  { src: "/images/BIRCH-40.jpg", alt: "Elevated view of the A-frame lodge and office building at Birch Glen Lodge in Cascade, Idaho" },
+  { src: "/images/BIRCH-43.jpg", alt: "Aerial view of Birch Glen Lodge and the town of Cascade, Idaho with ponds and forested mountains" },
+  { src: "/images/BIRCH-45.jpg", alt: "Guest room with a queen bed, wood-paneled walls, TV and dresser at Birch Glen Lodge" },
+  { src: "/images/BIRCH-47.jpg", alt: "Guest bathroom with wood-paneled walls, vanity sink, mirror and tub at Birch Glen Lodge" },
+  { src: "/images/BIRCH-48.jpg", alt: "Bathroom with a tub-shower, white curtain, toilet and towels at Birch Glen Lodge" },
+  { src: "/images/BIRCH-50.jpg", alt: "Remodeled guest room with two queen beds, black bedding and slatted accent wall at Birch Glen Lodge" },
+  { src: "/images/BIRCH-51.jpg", alt: "Guest room with wall-mounted TV, black desk, chair and coffee bar at Birch Glen Lodge" },
+  { src: "/images/BIRCH-53.jpg", alt: "Two-queen guest room with black bedding, accent wall and curtained window at Birch Glen Lodge" },
+  { src: "/images/BIRCH-54.jpg", alt: "Guest room coffee bar with microwave, luggage rack and arched-mirror vanity at Birch Glen Lodge" },
+  { src: "/images/BIRCH-55.jpg", alt: "Bathroom with white subway-tiled walk-in shower and toilet at Birch Glen Lodge" },
+  { src: "/images/BIRCH-58.jpg", alt: "Guest room with two beds, wall-mounted TV and dining table at Birch Glen Lodge" },
+  { src: "/images/BIRCH-59.jpg", alt: "Guest room with wall-mounted TV, reclaimed-wood dresser and mini fridge at Birch Glen Lodge" },
+  { src: "/images/BIRCH-61.jpg", alt: "Guest bathroom vanity with coffee bar, microwave, mirror and towels at Birch Glen Lodge" },
+  { src: "/images/BIRCH-62.jpg", alt: "Bathroom with tub-shower, toilet and hanging towels at Birch Glen Lodge" },
+  { src: "/images/BIRCH-63.jpg", alt: "Guest room with queen bed, wood-accent headboard and table with two chairs at Birch Glen Lodge" },
+  { src: "/images/BIRCH-64.jpg", alt: "Guest room with wall-mounted TV, reclaimed-wood dresser and mini fridge at Birch Glen Lodge" },
+  { src: "/images/BIRCH-65.jpg", alt: "Guest room seating nook with bistro table beside a window AC unit at Birch Glen Lodge" },
+  { src: "/images/BIRCH-66.jpg", alt: "Guest bathroom vanity with mirror, sink and coffee bar at Birch Glen Lodge" },
+  { src: "/images/BIRCH-67.jpg", alt: "Bathroom with tan tub-shower, white curtain and toilet at Birch Glen Lodge" },
+  { src: "/images/BIRCH-70.jpg", alt: "Exterior of the single-story motel rooms with covered walkway and birch tree at Birch Glen Lodge" },
+  { src: "/images/BIRCH-72.jpg", alt: "Front of the green A-frame lodge and office building at Birch Glen Lodge in Cascade, Idaho" },
+  { src: "/images/BIRCH-75.jpg", alt: "Yale keypad smart lock on a guest room door at Birch Glen Lodge" },
+  { src: "/images/BIRCH-84.jpg", alt: "Two queen beds with black bedding and slatted accent wall in a remodeled room at Birch Glen Lodge" },
+  { src: "/images/BIRCH-87.jpg", alt: "Bedside detail with tripod lamp, digital clock and slatted accent wall at Birch Glen Lodge" },
+  { src: "/images/BIRCH-79.jpg", alt: "Wall-mounted body wash, shampoo and conditioner dispensers in a tiled shower at Birch Glen Lodge" },
+  { src: "/images/BIRCH-78.jpg", alt: "Renovated bathroom vanity with arched mirror and globe sconce lights at Birch Glen Lodge" },
+  { src: "/images/BIRCH-97.jpg", alt: "Pine-paneled lodge living room with sofa, armchairs, mounted TV and kitchen at Birch Glen Lodge" },
+  { src: "/images/BIRCH-99.jpg", alt: "Pine-walled bedroom with a queen bed and nightstand at Birch Glen Lodge" },
+  { src: "/images/BIRCH-100.jpg", alt: "Pine-paneled kitchenette with sink, open shelving and coffee bar at Birch Glen Lodge" },
+  { src: "/images/BIRCH-95.jpg", alt: "Covered wood deck with bistro table and chairs overlooking the grounds at Birch Glen Lodge" },
+  { src: "/images/BIRCH-92.jpg", alt: "Coffee bar with single-serve maker and condiments on a wood counter at Birch Glen Lodge" },
+  { src: "/images/BIRCH-91.jpg", alt: "Pine-walled bathroom with towel shelf, mirror and vanity sink at Birch Glen Lodge" },
+  { src: "/images/BIRCH-107.jpg", alt: "Game room with pool table, air hockey and ice machine at Birch Glen Lodge" },
+];

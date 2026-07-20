@@ -37,7 +37,13 @@ export function Hero({
     >
       <Image src={image} alt={imageAlt} fill priority={priority} sizes="100vw" className="object-cover" />
       <div className="absolute inset-0 bg-ink/40" />
-      <Container className={cx("relative text-center", tall ? "pt-[15vh] pb-24" : "pt-44 pb-20")}>
+      <Container
+        className={cx(
+          "hero-enter relative text-center",
+          // max() keeps the title clear of the fixed header on short/landscape viewports
+          tall ? "pt-[max(15vh,7rem)] pb-24" : "pt-44 pb-20",
+        )}
+      >
         {eyebrow ? <p className="eyebrow !text-accent">{eyebrow}</p> : null}
         <h1 className={cx("mx-auto max-w-4xl text-white", tall ? "h1" : "h1 !text-[64px] max-[1024px]:!text-[52px] max-[767px]:!text-[40px]")}>
           {title}

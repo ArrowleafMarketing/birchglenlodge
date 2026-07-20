@@ -1,25 +1,33 @@
-import type { Metadata } from "next";
+import Link from "next/link";
 import { LegalShell } from "@/components/legal";
+import { pageMetadata, breadcrumbJsonLd, JsonLd } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Privacy Policy",
+export const metadata = pageMetadata({
+  title: "Privacy Policy | Birch Glen Lodge",
   description:
-    "How The Birch Glen Lodge collects, uses, and protects your personal information when you visit our website.",
-};
+    "How Birch Glen Lodge & Motel collects, uses, and protects your personal information when you visit or book through our website.",
+  path: "/privacy-policy/",
+});
+
+const breadcrumb = breadcrumbJsonLd([
+  { name: "Home", path: "/" },
+  { name: "Privacy Policy", path: "/privacy-policy/" },
+]);
 
 export default function PrivacyPolicyPage() {
   return (
     <LegalShell title="Privacy Policy">
+      <JsonLd data={breadcrumb} />
       <p>
         <strong>Effective Date:</strong> 5/1/25
       </p>
       <p>
         At The Birch Glen Lodge, your privacy is important to us. This Privacy Policy outlines how we
         collect, use, and protect your personal information when you visit our website,{" "}
-        <a href="/">https://thebirchglenlodge.com/</a>.
+        <Link href="/">https://thebirchglenlodge.com/</Link>.
       </p>
 
-      <h3>1. Information We Collect</h3>
+      <h2>1. Information We Collect</h2>
       <p>We may collect the following types of personal and technical information:</p>
       <ul>
         <li>
@@ -42,7 +50,7 @@ export default function PrivacyPolicyPage() {
         </li>
       </ul>
 
-      <h3>2. How We Collect Information</h3>
+      <h2>2. How We Collect Information</h2>
       <p>We collect information through:</p>
       <ul>
         <li>Booking and contact forms on our website</li>
@@ -51,7 +59,7 @@ export default function PrivacyPolicyPage() {
         <li>Cookies and similar technologies</li>
       </ul>
 
-      <h3>3. How We Use Your Information</h3>
+      <h2>3. How We Use Your Information</h2>
       <p>We use your information to:</p>
       <ul>
         <li>Process and confirm your reservations</li>
@@ -62,7 +70,7 @@ export default function PrivacyPolicyPage() {
         <li>Comply with legal obligations</li>
       </ul>
 
-      <h3>4. Sharing Your Information</h3>
+      <h2>4. Sharing Your Information</h2>
       <p>
         We may share your information with trusted third-party providers who assist us in operating
         our website and delivering services, including:
@@ -77,7 +85,7 @@ export default function PrivacyPolicyPage() {
         on our behalf.
       </p>
 
-      <h3>5. Cookies and Tracking Technologies</h3>
+      <h2>5. Cookies and Tracking Technologies</h2>
       <p>We use cookies and similar technologies to:</p>
       <ul>
         <li>Improve your browsing experience</li>
@@ -89,13 +97,13 @@ export default function PrivacyPolicyPage() {
         to our use of cookies as described in this policy.
       </p>
 
-      <h3>6. Data Security</h3>
+      <h2>6. Data Security</h2>
       <p>
         We take reasonable steps to protect your information from unauthorized access, use, or
         disclosure. However, no method of transmission over the Internet is 100% secure.
       </p>
 
-      <h3>7. Your Rights</h3>
+      <h2>7. Your Rights</h2>
       <p>If you would like to:</p>
       <ul>
         <li>Access, correct, or delete your personal information</li>
@@ -103,7 +111,7 @@ export default function PrivacyPolicyPage() {
       </ul>
       <p>You may contact us using the information below.</p>
 
-      <h3>8. Contact Us</h3>
+      <h2>8. Contact Us</h2>
       <p>For any questions about this privacy policy or your data, please contact:</p>
       <p>
         <strong>The Birch Glen Lodge</strong>
@@ -113,7 +121,7 @@ export default function PrivacyPolicyPage() {
         208-382-4238
       </p>
 
-      <h3>9. Changes to This Policy</h3>
+      <h2>9. Changes to This Policy</h2>
       <p>
         We may update this policy from time to time. The updated version will be posted on our
         website with a new effective date.

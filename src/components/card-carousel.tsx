@@ -69,7 +69,7 @@ export function CardCarousel({
                 ) : null}
               </div>
               {item.title ? (
-                <h5 className="h5 mt-4 text-center text-ink">{item.title}</h5>
+                <h3 className="h5 mt-4 text-center text-ink">{item.title}</h3>
               ) : null}
             </>
           );

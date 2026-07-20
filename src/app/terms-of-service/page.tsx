@@ -1,14 +1,22 @@
-import type { Metadata } from "next";
 import { LegalShell } from "@/components/legal";
+import { pageMetadata, breadcrumbJsonLd, JsonLd } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Terms of Service",
-  description: "The terms governing your use of the Birch Glen Lodge website and services.",
-};
+export const metadata = pageMetadata({
+  title: "Terms of Service | Birch Glen Lodge",
+  description:
+    "The terms governing your use of the Birch Glen Lodge & Motel website, bookings, and guest services in Cascade, Idaho.",
+  path: "/terms-of-service/",
+});
+
+const breadcrumb = breadcrumbJsonLd([
+  { name: "Home", path: "/" },
+  { name: "Terms of Service", path: "/terms-of-service/" },
+]);
 
 export default function TermsOfServicePage() {
   return (
     <LegalShell title="Terms of Service">
+      <JsonLd data={breadcrumb} />
       <p>
         <strong>Effective Date:</strong> 12/19/25
       </p>
@@ -221,8 +229,12 @@ export default function TermsOfServicePage() {
         <br />
         Cascade, Idaho
       </p>
-      <p>Email: info@thebirchglenlodge.com</p>
-      <p>Phone: (208) 510-0663</p>
+      <p>
+        Email: <a href="mailto:info@thebirchglenlodge.com">info@thebirchglenlodge.com</a>
+      </p>
+      <p>
+        Phone: <a href="tel:2085100663">(208) 510-0663</a>
+      </p>
     </LegalShell>
   );
 }

@@ -20,11 +20,11 @@ export function SiteHeader() {
   return (
     <header className="fixed inset-x-0 top-0 z-50">
       <div className="mx-auto flex max-w-[1280px] items-center gap-4 px-5 py-5 sm:px-8">
-        {/* Logo in a white pill */}
+        {/* Logo — the image already has its own white background, so no pill */}
         <Link
           href="/"
           aria-label="Birch Glen Lodge home"
-          className="flex h-[50px] items-center rounded-[8px] bg-white px-5 shadow-sm"
+          className="flex h-[50px] items-center"
         >
           <Image
             src={site.headerLogo}
@@ -32,12 +32,15 @@ export function SiteHeader() {
             width={663}
             height={250}
             priority
-            className="h-6 w-auto"
+            className="h-[50px] w-auto rounded-[8px] shadow-md"
           />
         </Link>
 
-        {/* Desktop nav in a white pill */}
-        <nav className="mx-auto hidden h-[50px] items-center rounded-[8px] bg-white px-2 shadow-sm lg:flex">
+        {/* Desktop nav in a white pill — pushed right to sit beside Book Now */}
+        <nav
+          aria-label="Primary"
+          className="ml-auto hidden h-[50px] items-center rounded-[8px] bg-white px-2 shadow-sm lg:flex"
+        >
           {primaryNav.map((item) =>
             item.children ? (
               <div key={item.href} className="group relative h-full">
@@ -49,11 +52,22 @@ export function SiteHeader() {
                   )}
                 >
                   {item.label}
-                  <svg width="11" height="11" viewBox="0 0 12 12" aria-hidden className="mt-0.5">
-                    <path d="M2.5 4.5 6 8l3.5-3.5" fill="none" stroke="currentColor" strokeWidth="1.5" />
+                  <svg
+                    width="11"
+                    height="11"
+                    viewBox="0 0 12 12"
+                    aria-hidden
+                    className="mt-0.5"
+                  >
+                    <path
+                      d="M2.5 4.5 6 8l3.5-3.5"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="1.5"
+                    />
                   </svg>
                 </Link>
-                <div className="invisible absolute left-0 top-full min-w-[220px] pt-2 opacity-0 transition-all group-hover:visible group-hover:opacity-100">
+                <div className="invisible absolute left-0 top-full min-w-[220px] pt-2 opacity-0 transition-all group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100">
                   <div className="overflow-hidden rounded-[8px] bg-ink py-1">
                     {item.children.map((child) => (
                       <Link
@@ -106,26 +120,47 @@ export function SiteHeader() {
 
       {/* Mobile off-canvas menu */}
       {open ? (
-        <div className="mx-5 rounded-[8px] bg-white p-4 shadow-lg lg:hidden">
-          <nav className="flex flex-col">
+        <div className="mx-5 max-h-[calc(100dvh-90px)] overflow-y-auto rounded-[8px] bg-white p-4 shadow-lg lg:hidden">
+          <nav aria-label="Mobile" className="flex flex-col">
             {primaryNav.map((item) => (
-              <div key={item.href} className="border-b border-ink/5 last:border-0">
+              <div
+                key={item.href}
+                className="border-b border-ink/5 last:border-0"
+              >
                 {item.children ? (
                   <>
                     <button
                       type="button"
                       onClick={() => setGuideOpen((v) => !v)}
+                      aria-expanded={guideOpen}
                       className="flex w-full items-center justify-between py-3 text-left text-base font-medium text-ink"
                     >
                       {item.label}
-                      <svg width="14" height="14" viewBox="0 0 12 12" aria-hidden className={cx("transition-transform", guideOpen && "rotate-45")}>
-                        <path d="M6 2v8M2 6h8" stroke="currentColor" strokeWidth="1.5" />
+                      <svg
+                        width="14"
+                        height="14"
+                        viewBox="0 0 12 12"
+                        aria-hidden
+                        className={cx(
+                          "transition-transform",
+                          guideOpen && "rotate-45",
+                        )}
+                      >
+                        <path
+                          d="M6 2v8M2 6h8"
+                          stroke="currentColor"
+                          strokeWidth="1.5"
+                        />
                       </svg>
                     </button>
                     {guideOpen ? (
                       <div className="pb-2 pl-4">
                         {item.children.map((child) => (
-                          <Link key={child.href} href={child.href} className="block py-2 text-sm text-ink/70">
+                          <Link
+                            key={child.href}
+                            href={child.href}
+                            className="block py-2 text-sm text-ink/70"
+                          >
                             {child.label}
                           </Link>
                         ))}
@@ -133,7 +168,10 @@ export function SiteHeader() {
                     ) : null}
                   </>
                 ) : (
-                  <Link href={item.href} className="block py-3 text-base font-medium text-ink">
+                  <Link
+                    href={item.href}
+                    className="block py-3 text-base font-medium text-ink"
+                  >
                     {item.label}
                   </Link>
                 )}
@@ -147,7 +185,10 @@ export function SiteHeader() {
             >
               Book A Room
             </a>
-            <a href={site.phonePrimaryHref} className="py-3 text-center text-sm font-semibold text-ink">
+            <a
+              href={site.phonePrimaryHref}
+              className="py-3 text-center text-sm font-semibold text-ink"
+            >
               {site.phonePrimary}
             </a>
           </nav>
@@ -160,7 +201,12 @@ export function SiteHeader() {
 function MenuIcon() {
   return (
     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden>
-      <path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" />
+      <path
+        d="M4 7h16M4 12h16M4 17h16"
+        stroke="currentColor"
+        strokeWidth="1.75"
+        strokeLinecap="round"
+      />
     </svg>
   );
 }
@@ -168,7 +214,12 @@ function MenuIcon() {
 function CloseIcon() {
   return (
     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden>
-      <path d="M6 6l12 12M18 6 6 18" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" />
+      <path
+        d="M6 6l12 12M18 6 6 18"
+        stroke="currentColor"
+        strokeWidth="1.75"
+        strokeLinecap="round"
+      />
     </svg>
   );
 }

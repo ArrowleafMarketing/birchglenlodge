@@ -1,18 +1,27 @@
-import type { Metadata } from "next";
+import Link from "next/link";
 import { Container } from "@/components/ui";
 import { Hero } from "@/components/sections";
+import { Reveal } from "@/components/reveal";
+import { pageMetadata, breadcrumbJsonLd, JsonLd } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Rivers, Lakes, Hot Springs",
+export const metadata = pageMetadata({
+  title: "Lake Cascade Fishing, Rivers & Hot Springs",
   description:
-    "Cascade and Valley County are filled with some of the best fishing and water-based recreation in Idaho — from rafting and kayaking to fishing, paddle boarding, hot springs, and world-class ice fishing.",
-};
+    "Fishing, rafting, kayaking, paddle boarding & hot springs in Cascade, Idaho. Lake Cascade offers world-class perch and ice fishing near Birch Glen Lodge.",
+  path: "/rivers-lakes-hot-springs/",
+});
+
+const breadcrumb = breadcrumbJsonLd([
+  { name: "Home", path: "/" },
+  { name: "Guide To Cascade", path: "/guide-to-cascade/" },
+  { name: "Rivers, Lakes, Hot Springs", path: "/rivers-lakes-hot-springs/" },
+]);
 
 type Fish = { name: string; sci: string; href: string };
 
 // List 1 — species observed in Lake Cascade (with search glyph on the live site)
 const fishListOne: Fish[] = [
-  { name: "Bluegill / Pumpkinseed, / Sunfish", sci: "Lepomis spp.", href: "https://idfg.idaho.gov/species/taxa/7257" },
+  { name: "Bluegill / Pumpkinseed / Sunfish", sci: "Lepomis spp.", href: "https://idfg.idaho.gov/species/taxa/7257" },
   { name: "Bullhead Catfish", sci: "Ameiurus spp.", href: "https://idfg.idaho.gov/species/taxa/7391" },
   { name: "Coho Salmon", sci: "Oncorhynchus kisutch", href: "https://idfg.idaho.gov/species/taxa/17203" },
   { name: "Crappie", sci: "Pomoxis spp.", href: "https://idfg.idaho.gov/species/taxa/19841" },
@@ -62,25 +71,28 @@ export default function RiversLakesHotSpringsPage() {
         priority
       />
 
+      <JsonLd data={breadcrumb} />
       <Container className="prose-body max-w-3xl py-16 text-ink/80 sm:py-20">
-        <h4 className="small-serif">
-          <strong>Rivers, Lakes, Hot Springs</strong>
-        </h4>
-        <p className="small-san-serif">We look forward to hearing from you!</p>
-        <p>
-          Cascade and Valley county are filled with some of the best fishing and water-based
-          recreation in Idaho. We have you covered from rafting and kayaking to fishing and paddle
-          boarding. We have hot springs for soaking and some of the best ice fishing in the world.
-        </p>
+        <Reveal>
+          <h2 className="small-serif">
+            <strong>Rivers, Lakes, Hot Springs</strong>
+          </h2>
+          <p className="small-san-serif">We look forward to hearing from you!</p>
+          <p>
+            Cascade and Valley County are filled with some of the best fishing and water-based
+            recreation in Idaho. We have you covered from rafting and kayaking to fishing and paddle
+            boarding. We have hot springs for soaking and some of the best ice fishing in the world.
+          </p>
+        </Reveal>
         <hr />
-        <h2 className="small-serif">
+        <Reveal as="h2" className="small-serif">
           <b>Lake Cascade</b>
-        </h2>
+        </Reveal>
         <p>
           Located less than 2 minutes from{" "}
-          <a href="https://birchglenlodge.com/">Birch Glen Lodge and Motel</a> on the North Fork of
+          <Link href="/">Birch Glen Lodge and Motel</Link> on the North Fork of
           the Payette river it has a surface area of 47 square miles. Lake Cascade is the fourth
-          largest lake or reservoir in the state. The closest city is Cascade and Donnelly.
+          largest lake or reservoir in the state. The closest cities are Cascade and Donnelly.
         </p>
         <p>
           For stocking, seasonal rules and licenses Check out{" "}
@@ -92,21 +104,20 @@ export default function RiversLakesHotSpringsPage() {
           <strong>Best trout, perch, and smallmouth fishing around!</strong>
           <br />A list of fish that have been observed in Lake Cascade.
         </p>
-        <ul>
+        <Reveal as="ul">
           {fishListOne.map((fish, i) => (
             <li key={`one-${i}`}>
-              <FishLink fish={fish} /> (<em>{fish.sci}</em>){" "}
-              <small className="glyphicon glyphicon-search text-muted"></small>
+              <FishLink fish={fish} /> (<em>{fish.sci}</em>)
             </li>
           ))}
-        </ul>
-        <ul>
+        </Reveal>
+        <Reveal as="ul" delay={80}>
           {fishListTwo.map((fish, i) => (
             <li key={`two-${i}`}>
               <FishLink fish={fish} /> (<em>{fish.sci}</em>)
             </li>
           ))}
-        </ul>
+        </Reveal>
         <p>
           If fishing isn’t what you’re here for then take a dip, relax on the shore, and watch the
           sailboats. So many options on Lake Cascade.

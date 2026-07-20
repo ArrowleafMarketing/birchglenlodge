@@ -53,6 +53,12 @@ export function ContactForm() {
         <input id="email" name="email" type="email" required className={field} />
       </div>
       <div>
+        <label htmlFor="phone" className="mb-1.5 block text-sm font-medium text-ink">
+          Phone
+        </label>
+        <input id="phone" name="phone" type="tel" className={field} />
+      </div>
+      <div>
         <label htmlFor="message" className="mb-1.5 block text-sm font-medium text-ink">
           Message
         </label>

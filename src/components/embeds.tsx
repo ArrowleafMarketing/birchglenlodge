@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import ReactDOM from "react-dom";
 import Script from "next/script";
 import { site } from "@/lib/site";
 
@@ -12,6 +13,10 @@ import { site } from "@/lib/site";
  */
 export function NewsletterEmbed() {
   const ref = useRef<HTMLIFrameElement>(null);
+
+  // Warm up the connection to the GoHighLevel/Arrowleaf host that serves the
+  // form iframe + form_embed.js, so it loads faster when scrolled into view.
+  ReactDOM.preconnect("https://api.arrowleafmarketing.com");
 
   useEffect(() => {
     function onMessage(e: MessageEvent) {
@@ -49,7 +54,7 @@ export function NewsletterEmbed() {
         data-height="950"
         data-layout-iframe-id="inline-NNtNQ9ALNXtAU1Em5Afs"
         data-form-id="NNtNQ9ALNXtAU1Em5Afs"
-        scrolling="no"
+        scrolling="auto"
         style={{ width: "100%", height: "950px", border: "none", borderRadius: "3px" }}
       />
       <Script src="https://api.arrowleafmarketing.com/js/form_embed.js" strategy="afterInteractive" />
@@ -59,6 +64,9 @@ export function NewsletterEmbed() {
 
 /** Contact page Google Map embed (matches the live iframe). */
 export function MapEmbed() {
+  // Warm up the Google Maps hosts so the map tiles load faster.
+  ReactDOM.preconnect("https://maps.google.com");
+  ReactDOM.preconnect("https://maps.gstatic.com", { crossOrigin: "anonymous" });
   return (
     <iframe
       src={site.mapEmbed}

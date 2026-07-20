@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import Image from "next/image";
 import {
   Container,
@@ -8,30 +7,38 @@ import {
   ArrowRight,
 } from "@/components/ui";
 import { Hero } from "@/components/sections";
-import { CardCarousel } from "@/components/card-carousel";
+import { Reveal } from "@/components/reveal";
+import { RoomsCarousel } from "@/components/rooms-marquee";
 import { roomsCarousel, roomIncludes, lodgeAmenities, activityColumns } from "@/lib/content";
 import { site } from "@/lib/site";
+import { pageMetadata, breadcrumbJsonLd, roomsJsonLd, JsonLd } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Rooms",
+export const metadata = pageMetadata({
+  title: "Rooms & Suites | Birch Glen Lodge, Cascade ID",
   description:
-    "Comfort for your adventure in the mountains. Explore our rooms — Royal King, Deluxe Double, Single Queen, Triple, and the Private Upstairs Suite — each with a mini fridge, microwave, air conditioning/heater, coffee maker, and television/cable/wifi.",
-};
+    "Explore our rooms and suites — Royal King, Deluxe Double, Single Queen, Triple & Private Upstairs Suite. Comfort for your mountain adventure in Cascade, Idaho.",
+  path: "/rooms/",
+});
+
+const breadcrumb = breadcrumbJsonLd([
+  { name: "Home", path: "/" },
+  { name: "Rooms", path: "/rooms/" },
+]);
 
 const roomCards = roomsCarousel.map((room) => ({
+  name: room.name,
   image: room.image,
-  hover: room.hover,
-  title: room.name,
-  alt: room.name,
 }));
 
 export default function RoomsPage() {
   return (
     <>
+      <JsonLd data={breadcrumb} />
+      <JsonLd data={roomsJsonLd(roomCards, roomIncludes)} />
       {/* 1. Hero / intro title band */}
       <Hero
         image="/images/Birch-166-scaled.jpg"
-        imageAlt="Birch Glen Lodge in Cascade, Idaho"
+        imageAlt="Guest room with two beds and slatted wood accent walls at Birch Glen Lodge in Cascade, Idaho"
         title="Our Rooms"
         subtitle="Comfort For Your Adventure In The Mountains"
         priority
@@ -40,86 +47,98 @@ export default function RoomsPage() {
       {/* 2. Explore our rooms */}
       <Section>
         <Container>
-          <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
+          <Reveal className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
             <SectionHeader eyebrow="Picture Your Stay" title="Explore our rooms" />
             <ButtonAnchor
               href={site.bookingUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="shrink-0"
+              className="shrink-0 self-start sm:self-auto"
             >
               Book Now <ArrowRight />
             </ButtonAnchor>
-          </div>
-          <div className="mt-12">
-            <CardCarousel items={roomCards} />
-          </div>
+          </Reveal>
+          <Reveal delay={100} className="mt-12">
+            <RoomsCarousel items={roomCards} />
+          </Reveal>
         </Container>
       </Section>
 
-      {/* 3. Room & Lodge Features */}
-      <Section className="pt-0">
-        <Container>
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            <div className="relative aspect-[851/1280] overflow-hidden">
-              <Image
-                src="/images/BIRCH-80.jpg"
-                alt="A guest room at Birch Glen Lodge"
-                fill
-                sizes="(min-width:1024px) 25vw, (min-width:640px) 50vw, 100vw"
-                className="object-cover"
-              />
-            </div>
-            <div className="flex flex-col justify-center bg-accent p-8">
-              <h3 className="h3 text-ink">Each Room Includes:</h3>
-              <ul className="mt-6 space-y-3">
-                {roomIncludes.map((item) => (
-                  <li key={item} className="flex items-start gap-3 text-lg text-ink">
-                    <Check />
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div className="relative aspect-[851/1280] overflow-hidden">
-              <Image
-                src="/images/BIRCH-72.jpg"
-                alt="Lodge amenities at Birch Glen Lodge"
-                fill
-                sizes="(min-width:1024px) 25vw, (min-width:640px) 50vw, 100vw"
-                className="object-cover"
-              />
-            </div>
-            <div className="flex flex-col justify-center bg-accent p-8">
-              <h3 className="h3 text-ink">Lodge Amenities:</h3>
-              <ul className="mt-6 space-y-3">
-                {lodgeAmenities.map((item) => (
-                  <li key={item} className="flex items-start gap-3 text-lg text-ink">
-                    <Check />
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        </Container>
-      </Section>
+      {/* 3. Room & Lodge Features — full-bleed image + dark panel pairs */}
+      <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
+        <Reveal variant="img" className="relative min-h-[420px] md:min-h-[600px]">
+          <Image
+            src="/images/BIRCH-80.jpg"
+            alt="Two beds with black bedding and a nightstand in a remodeled room at Birch Glen Lodge"
+            fill
+            sizes="(min-width:768px) 25vw, 100vw"
+            className="object-cover"
+          />
+        </Reveal>
+        <div className="flex flex-col bg-ink p-10 lg:p-14">
+          <Reveal as="h2" delay={80} className="h2 text-white">
+            Each Room Includes:
+          </Reveal>
+          <ul className="mt-8 space-y-4">
+            {roomIncludes.map((item, j) => (
+              <Reveal
+                as="li"
+                key={item}
+                delay={160 + j * 90}
+                className="flex items-start gap-3 text-lg text-white"
+              >
+                <Check />
+                <span>{item}</span>
+              </Reveal>
+            ))}
+          </ul>
+        </div>
+        <Reveal variant="img" className="relative min-h-[420px] md:min-h-[600px]">
+          <Image
+            src="/images/BIRCH-72.jpg"
+            alt="Front of the green A-frame lodge and office building at Birch Glen Lodge in Cascade, Idaho"
+            fill
+            sizes="(min-width:768px) 25vw, 100vw"
+            className="object-cover"
+          />
+        </Reveal>
+        <div className="flex flex-col bg-ink p-10 lg:p-14">
+          <Reveal as="h2" delay={80} className="h2 text-white">
+            Lodge Amenities:
+          </Reveal>
+          <ul className="mt-8 space-y-4">
+            {lodgeAmenities.map((item, j) => (
+              <Reveal
+                as="li"
+                key={item}
+                delay={160 + j * 90}
+                className="flex items-start gap-3 text-lg text-white"
+              >
+                <Check />
+                <span>{item}</span>
+              </Reveal>
+            ))}
+          </ul>
+        </div>
+      </section>
 
       {/* 4. Group Bookings */}
       <Section>
         <Container>
-          <SectionHeader
-            eyebrow="Big Group? We have you covered!"
-            title="Group Bookings"
-            intro="Discounts available for groups of 5+ rooms booked at a time. Please call our main number and ask to speak with a manager to plan your next group booking! "
-          />
+          <Reveal>
+            <SectionHeader
+              eyebrow="Big Group? We have you covered!"
+              title="Group Bookings"
+              intro="Discounts available for groups of 5+ rooms booked at a time. Please call our main number and ask to speak with a manager to plan your next group booking!"
+            />
+          </Reveal>
         </Container>
       </Section>
 
       {/* 5. Cascade. A Recreational Paradise */}
       <Section className="pt-0">
         <Container>
-          <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
+          <Reveal className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
             <SectionHeader
               eyebrow="Your Guide To The Outdoors"
               title="Cascade. A Recreational Paradise"
@@ -128,21 +147,21 @@ export default function RoomsPage() {
               href={site.bookingUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="shrink-0"
+              className="shrink-0 self-start sm:self-auto"
             >
               Book Today <ArrowRight />
             </ButtonAnchor>
-          </div>
-          <div className="mt-12 grid gap-x-8 gap-y-3 sm:grid-cols-3">
+          </Reveal>
+          <div className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
             {activityColumns.map((column, i) => (
-              <ul key={i} className="space-y-3">
+              <Reveal as="ul" key={i} delay={i * 120} className="space-y-3">
                 {column.map((activity) => (
                   <li key={activity} className="flex items-start gap-3 text-lg text-ink">
                     <Check />
                     <span>{activity}</span>
                   </li>
                 ))}
-              </ul>
+              </Reveal>
             ))}
           </div>
         </Container>

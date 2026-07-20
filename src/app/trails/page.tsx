@@ -1,19 +1,28 @@
-import type { Metadata } from "next";
 import { Container, Section } from "@/components/ui";
 import { Hero } from "@/components/sections";
+import { Reveal } from "@/components/reveal";
+import { pageMetadata, breadcrumbJsonLd, JsonLd } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Trails",
+export const metadata = pageMetadata({
+  title: "OHV & Hiking Trails Near Cascade, Idaho",
   description:
-    "Leave the road, take the trail. Explore the OHV and backcountry trails around Cascade, Idaho — including Dollar Creek Way, East Mountain, Gold Fork North, Needles Route, and Wilson Creek. We have parking for your big trailers!",
-};
+    "Explore OHV and backcountry trails near Cascade, Idaho — Dollar Creek, East Mountain, Gold Fork North, Needles Route & Wilson Creek. Trailer parking available.",
+  path: "/trails/",
+});
+
+const breadcrumb = breadcrumbJsonLd([
+  { name: "Home", path: "/" },
+  { name: "Guide To Cascade", path: "/guide-to-cascade/" },
+  { name: "Trails", path: "/trails/" },
+]);
 
 export default function TrailsPage() {
   return (
     <>
+      <JsonLd data={breadcrumb} />
       <Hero
         image="/images/2.jpg"
-        imageAlt="Forest trail near Birch Glen Lodge in Cascade, Idaho"
+        imageAlt="Mountain hiking trail through an alpine meadow with pines and rocky peaks near Cascade, Idaho"
         title="Trails"
         priority
       />
@@ -21,8 +30,10 @@ export default function TrailsPage() {
       <Section>
         <Container>
           <div className="prose-body mx-auto max-w-3xl">
-            <h2 className="small-serif">Leave the Road. Take the Trail.</h2>
-            <h4 className="small-serif">OHV Trail Riding</h4>
+            <Reveal>
+              <h2 className="small-serif">Leave the Road. Take the Trail.</h2>
+              <h3 className="small-serif">OHV Trail Riding</h3>
+            </Reveal>
             <p>
               <a
                 href="https://www.fs.usda.gov/activity/boise/recreation/ohv/?recid=5026&actid=93"
@@ -33,9 +44,9 @@ export default function TrailsPage() {
               </a>
             </p>
             <hr />
-            <h4>
+            <Reveal as="h4">
               <strong>Dollar Creek Way Trail #114</strong> –
-            </h4>
+            </Reveal>
             <p>
               This description covers the first 3 miles of the trail to its intersection with the
               Needles Route Trail.
@@ -70,9 +81,9 @@ export default function TrailsPage() {
               </a>
             </p>
             <hr />
-            <h4 className="small-serif">
+            <Reveal as="h4" className="small-serif">
               <strong>East Mountain Trail Way</strong>
-            </h4>
+            </Reveal>
             <p>
               The East Mountain Way Trail offers views of Round Valley and Long Valley, passes
               through forests and meadows, and ends near East Mountain Lookout.
@@ -115,9 +126,9 @@ export default function TrailsPage() {
               </a>
             </p>
             <hr />
-            <h4 className="small-serif">
+            <Reveal as="h4" className="small-serif">
               <strong>Gold Fork North Trail</strong>
-            </h4>
+            </Reveal>
             <p>
               The ford of the Gold Fork North Trail at the northern end of the trail, is deep and
               swift for all users. The other two fords shouldn’t be much of a problem for hikers and
@@ -170,9 +181,9 @@ export default function TrailsPage() {
               </a>
             </p>
             <hr />
-            <h4 className="small-serif">
+            <Reveal as="h4" className="small-serif">
               <strong>Needles Route Trail</strong>
-            </h4>
+            </Reveal>
             <p>
               Needles Route Trail – The trail follows a ridge for most of its length providing views
               of the surrounding area. The trail intersects the Dollar Creek Ridge Trail, 6 miles
@@ -223,9 +234,9 @@ export default function TrailsPage() {
               </a>
             </p>
             <hr />
-            <h4 className="small-serif">
+            <Reveal as="h4" className="small-serif">
               <strong>Wilson Creek Trail</strong>
-            </h4>
+            </Reveal>
             <p>
               Wilson Creek Trail – The trail crosses several creeks, passes through meadows carpeted
               with wildflowers, and skirts the edge of Rock Lake. Although several trails access the
@@ -234,7 +245,7 @@ export default function TrailsPage() {
             </p>
             <p>
               A 4WD high clearance vehicle is advised for this 3 mile section of road. Because
-              sections of the trail are criscrossed by cow paths, the trail will be difficult to
+              sections of the trail are crisscrossed by cow paths, the trail will be difficult to
               find. Only a few blazes and rock cairns mark the trail. The trail passes through areas
               grazed by cattle in the summer and fall.
             </p>
@@ -262,10 +273,14 @@ export default function TrailsPage() {
               </a>
             </p>
             <hr />
-            <h4 className="extra-small-serif">
-              <strong>Room for your toys. Room to relax.</strong>
-            </h4>
-            <p className="extra-small-serif">We have parking for your big trailers!</p>
+            <Reveal>
+              <h4 className="extra-small-serif">
+                <strong>Room for your toys. Room to relax.</strong>
+              </h4>
+              <p className="extra-small-serif">
+                We have parking for your big trailers!
+              </p>
+            </Reveal>
           </div>
         </Container>
       </Section>
