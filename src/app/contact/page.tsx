@@ -161,9 +161,6 @@ export default function ContactPage() {
                 can&#8217;t miss experience!
               </p>
             </Reveal>
-            <Reveal delay={120} className="mt-8">
-              <ContactForm />
-            </Reveal>
           </div>
         </Container>
       </Section>

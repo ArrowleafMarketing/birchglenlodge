@@ -53,6 +53,19 @@ export const metadata: Metadata = {
   // Explicit tel:/mailto links are used throughout, so suppress iOS auto-linking
   // of plain-text numbers/addresses (avoids inconsistent styling).
   formatDetection: { telephone: false, address: false, email: false },
+  // Favicon set lives in /public/meta (generated bundle). The .ico is served
+  // from app/favicon.ico via Next's root-favicon convention (covers bare
+  // /favicon.ico requests + the legacy `sizes="any"` link); the modern PNGs +
+  // apple-touch icon are declared here. Android/PWA icons live in manifest.ts.
+  icons: {
+    icon: [
+      { url: "/meta/favicon-32x32.png", type: "image/png", sizes: "32x32" },
+      { url: "/meta/favicon-16x16.png", type: "image/png", sizes: "16x16" },
+    ],
+    apple: [
+      { url: "/meta/apple-touch-icon.png", type: "image/png", sizes: "180x180" },
+    ],
+  },
   robots: {
     index: true,
     follow: true,

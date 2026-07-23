@@ -46,6 +46,15 @@ export const site = {
   newsletterEmbed: "https://api.arrowleafmarketing.com/widget/form/NNtNQ9ALNXtAU1Em5Afs",
 } as const;
 
+/*
+  Tenant key for the shared blog management system (Supabase `posts.site_key`).
+  The blog reads only rows whose site_key matches this value, so it MUST be the
+  exact key the CMS stores for Birch Glen. Change it here if the CMS uses a
+  different key. Until it matches (or before env vars are set) the blog shows the
+  bundled mock content in lib/blog/posts.mock.tsx.
+*/
+export const SITE_KEY = "birch-glen-lodge" as const;
+
 export type NavItem = {
   label: string;
   href: string;
@@ -56,14 +65,7 @@ export type NavItem = {
 export const primaryNav: NavItem[] = [
   { label: "About", href: "/about" },
   { label: "Rooms", href: "/rooms" },
-  {
-    label: "Guide To Cascade",
-    href: "/guide-to-cascade",
-    children: [
-      { label: "Trails", href: "/trails" },
-      { label: "Rivers, Lakes, Hot Springs", href: "/rivers-lakes-hot-springs" },
-    ],
-  },
+  { label: "Explore Cascade", href: "/explore-cascade" },
   { label: "Gallery", href: "/gallery" },
   { label: "Contact Us", href: "/contact" },
 ];

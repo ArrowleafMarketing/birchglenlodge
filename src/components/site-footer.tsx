@@ -74,9 +74,15 @@ export function SiteFooter() {
         <div className="mt-14 flex flex-col gap-4 border-t border-line pt-6 text-[14px] text-ink/60 sm:flex-row sm:items-center sm:justify-end sm:gap-8">
           <p className="sm:mr-auto">{new Date().getFullYear()}, Birch Glen Lodge</p>
           <nav
-            aria-label="Legal"
+            aria-label="Footer"
             className="flex flex-col gap-4 sm:flex-row sm:gap-8"
           >
+            <Link
+              href="/explore-cascade"
+              className="transition-colors hover:text-primary"
+            >
+              Explore Cascade
+            </Link>
             <Link
               href="/privacy-policy"
               className="transition-colors hover:text-primary"
