@@ -1,6 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Container, Section, SectionHeader, ButtonAnchor, ButtonLink, ArrowRight } from "@/components/ui";
+import {
+  Container,
+  Section,
+  SectionHeader,
+  ButtonAnchor,
+  ButtonLink,
+  ArrowRight,
+} from "@/components/ui";
 import { Hero, BgSection } from "@/components/sections";
 import { Reveal } from "@/components/reveal";
 import { getPosts } from "@/lib/blog/posts";
@@ -11,7 +18,8 @@ import { pageMetadata, breadcrumbJsonLd, JsonLd, absoluteUrl } from "@/lib/seo";
 export const revalidate = 60;
 
 export const metadata = pageMetadata({
-  title: "Explore Cascade | Local Guides & Stories | Birch Glen Lodge",
+  title:
+    "Explore Cascade | Things to Do, Travel Tips & Local Guides | Birch Glen Lodge",
   description:
     "Local guides and stories from Birch Glen Lodge & Motel: fishing, trails, hot springs, seasons, and things to do in Cascade, Idaho.",
   path: "/explore-cascade/",
@@ -63,9 +71,14 @@ export default async function ExploreCascadePage() {
       {posts.length === 0 ? (
         <Section>
           <Container className="text-center">
-            <SectionHeader align="center" eyebrow="Coming soon" title="Stories are on the way" />
+            <SectionHeader
+              align="center"
+              eyebrow="Coming soon"
+              title="Stories are on the way"
+            />
             <p className="mx-auto mt-5 max-w-xl text-lg text-ink/70">
-              We&apos;re putting together local guides to Cascade. Check back soon.
+              We&apos;re putting together local guides to Cascade. Check back
+              soon.
             </p>
           </Container>
         </Section>
@@ -126,7 +139,12 @@ export default async function ExploreCascadePage() {
               title="Base camp for your Cascade adventure"
             />
             <div className="mt-9 flex flex-col items-center justify-center gap-4 sm:flex-row">
-              <ButtonAnchor href={site.bookingUrl} target="_blank" rel="noopener noreferrer" variant="onDark">
+              <ButtonAnchor
+                href={site.bookingUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                variant="onDark"
+              >
                 Book Now <ArrowRight />
               </ButtonAnchor>
               <ButtonLink href="/rooms" variant="outlineLight">
@@ -146,7 +164,9 @@ function CardMeta({ post }: { post: BlogPost }) {
   return (
     <p className="text-[13px] font-semibold uppercase tracking-wide text-primary">
       {post.categoryLabel ?? "ARTICLE"}
-      {post.readTime ? <span className="text-ink/70"> · {post.readTime}</span> : null}
+      {post.readTime ? (
+        <span className="text-ink/70"> · {post.readTime}</span>
+      ) : null}
     </p>
   );
 }
@@ -165,8 +185,12 @@ function FeaturedCard({ post }: { post: BlogPost }) {
       </div>
       <div className="mt-6">
         <CardMeta post={post} />
-        <h3 className="h4 mt-2 text-ink transition-colors group-hover:text-primary">{post.title}</h3>
-        <p className="mt-3 text-[17px] leading-relaxed text-ink/70">{post.excerpt}</p>
+        <h3 className="h4 mt-2 text-ink transition-colors group-hover:text-primary">
+          {post.title}
+        </h3>
+        <p className="mt-3 text-[17px] leading-relaxed text-ink/70">
+          {post.excerpt}
+        </p>
       </div>
     </Link>
   );
@@ -186,7 +210,9 @@ function CompactCard({ post }: { post: BlogPost }) {
       </div>
       <div className="min-w-0">
         <CardMeta post={post} />
-        <h3 className="h5 mt-1.5 text-ink transition-colors group-hover:text-primary">{post.title}</h3>
+        <h3 className="h5 mt-1.5 text-ink transition-colors group-hover:text-primary">
+          {post.title}
+        </h3>
       </div>
     </Link>
   );
@@ -209,8 +235,12 @@ function ArticleCard({ post }: { post: BlogPost }) {
       </div>
       <div className="flex flex-1 flex-col p-6">
         <CardMeta post={post} />
-        <h3 className="h5 mt-2 text-ink transition-colors group-hover:text-primary">{post.title}</h3>
-        <p className="mt-2 text-[15px] leading-relaxed text-ink/70">{post.excerpt}</p>
+        <h3 className="h5 mt-2 text-ink transition-colors group-hover:text-primary">
+          {post.title}
+        </h3>
+        <p className="mt-2 text-[15px] leading-relaxed text-ink/70">
+          {post.excerpt}
+        </p>
         {post.publishedAt ? (
           <p className="mt-4 text-[13px] text-ink/70">{post.publishedAt}</p>
         ) : null}
