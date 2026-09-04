@@ -236,7 +236,7 @@ export default async function ExploreCascadePostPage({
                     href={site.bookingUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="mt-5 block rounded-[8px] bg-primary px-5 py-3 text-center text-[15px] font-semibold text-white transition-colors hover:bg-secondary"
+                    className="mt-5 block rounded-none bg-primary px-5 py-3 text-center text-[15px] font-semibold text-white transition-colors hover:bg-secondary"
                   >
                     Check Availability
                   </a>
@@ -270,7 +270,7 @@ function ShareLink({ href, label, children }: { href: string; label: string; chi
       target="_blank"
       rel="noopener noreferrer"
       aria-label={label}
-      className="flex h-10 w-10 items-center justify-center rounded-full border border-line text-ink/70 transition-colors hover:border-primary hover:text-primary"
+      className="flex h-10 w-10 items-center justify-center rounded-none border border-line text-ink/70 transition-colors hover:border-primary hover:text-primary"
     >
       {children}
     </a>

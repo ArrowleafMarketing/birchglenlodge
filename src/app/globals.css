@@ -16,7 +16,7 @@
   --font-sans: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
   --font-serif: var(--font-lora), Georgia, ui-serif, serif;
 
-  --radius-btn: 8px;
+  --radius-btn: 0px;
 }
 
 :root {

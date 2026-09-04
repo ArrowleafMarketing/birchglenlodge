@@ -93,7 +93,7 @@ export function CardCarousel({
           type="button"
           onClick={() => scrollByCards(-1)}
           aria-label="Previous"
-          className="flex h-11 w-11 items-center justify-center rounded-full border border-ink/15 text-ink transition-colors hover:border-primary hover:text-primary"
+          className="flex h-11 w-11 items-center justify-center rounded-none border border-ink/15 text-ink transition-colors hover:border-primary hover:text-primary"
         >
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden>
             <path d="M15 5l-7 7 7 7" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" />
@@ -103,7 +103,7 @@ export function CardCarousel({
           type="button"
           onClick={() => scrollByCards(1)}
           aria-label="Next"
-          className="flex h-11 w-11 items-center justify-center rounded-full border border-ink/15 text-ink transition-colors hover:border-primary hover:text-primary"
+          className="flex h-11 w-11 items-center justify-center rounded-none border border-ink/15 text-ink transition-colors hover:border-primary hover:text-primary"
         >
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden>
             <path d="M9 5l7 7-7 7" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" />

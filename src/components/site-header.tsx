@@ -101,7 +101,7 @@ export function SiteHeader() {
           href={site.bookingUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="hidden h-[50px] items-center rounded-[8px] bg-primary px-6 text-[15px] font-semibold text-white transition-colors hover:bg-secondary lg:inline-flex"
+          className="hidden h-[50px] items-center rounded-none bg-primary px-6 text-[15px] font-semibold text-white transition-colors hover:bg-secondary lg:inline-flex"
         >
           Book Now
         </a>
@@ -112,7 +112,7 @@ export function SiteHeader() {
           onClick={() => setOpen((v) => !v)}
           aria-label="Toggle menu"
           aria-expanded={open}
-          className="ml-auto flex h-[50px] w-[50px] items-center justify-center rounded-[8px] bg-white text-ink shadow-sm lg:hidden"
+          className="ml-auto flex h-[50px] w-[50px] items-center justify-center rounded-none bg-white text-ink shadow-sm lg:hidden"
         >
           {open ? <CloseIcon /> : <MenuIcon />}
         </button>
@@ -181,7 +181,7 @@ export function SiteHeader() {
               href={site.bookingUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-3 rounded-[8px] bg-primary px-5 py-3 text-center text-sm font-semibold text-white"
+              className="mt-3 rounded-none bg-primary px-5 py-3 text-center text-sm font-semibold text-white"
             >
               Book A Room
             </a>

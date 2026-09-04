@@ -72,7 +72,7 @@ export function SectionHeader({
 type ButtonVariant = "primary" | "onDark" | "outlineLight";
 
 const buttonBase =
-  "inline-flex items-center justify-center gap-2 rounded-[8px] px-8 py-4 text-[17px] font-semibold leading-none transition-colors duration-200 sm:px-[50px] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary";
+  "inline-flex items-center justify-center gap-2 rounded-none px-8 py-4 text-[17px] font-semibold leading-none transition-colors duration-200 sm:px-[50px] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary";
 
 const buttonVariants: Record<ButtonVariant, string> = {
   // Live site: primary bg, white text, hover -> secondary (teal)
