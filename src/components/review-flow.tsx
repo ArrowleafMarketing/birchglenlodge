@@ -43,15 +43,13 @@ function feedbackCopy(rating: Rating) {
     return {
       eyebrow: "Almost",
       heading: "What would have made it five stars?",
-      body:
-        "Glad it went well overall — but we'd rather hear what fell short so the next one is perfect. This goes straight to our team.",
+      body: "Glad it went well overall — but we'd rather hear what fell short so the next one is perfect. This goes straight to our team.",
     };
   }
   return {
     eyebrow: "We're listening",
     heading: "Tell us what went wrong",
-    body:
-      "We'd rather hear it directly so we can make it right. This goes straight to our team — tell us what happened and we'll follow up.",
+    body: "We'd rather hear it directly so we can make it right. This goes straight to our team — tell us what happened and we'll follow up.",
   };
 }
 
@@ -151,9 +149,9 @@ export function ReviewFlow() {
         }),
       });
       if (!res.ok) {
-        const payload = (await res.json().catch(() => null)) as
-          | { error?: string }
-          | null;
+        const payload = (await res.json().catch(() => null)) as {
+          error?: string;
+        } | null;
         throw new Error(payload?.error ?? "Something went wrong on our end.");
       }
       setSubmitted(true);
@@ -204,9 +202,7 @@ export function ReviewFlow() {
         <div className="w-full max-w-[620px]">
           {step === "rate" && <RatingStep onRate={setRating} rating={rating} />}
 
-          {step === "google" && (
-            <GoogleStep onChangeRating={resetRating} />
-          )}
+          {step === "google" && <GoogleStep onChangeRating={resetRating} />}
 
           {step === "feedback" && rating !== null && (
             <Card>
@@ -330,12 +326,12 @@ function GoogleStep({ onChangeRating }: { onChangeRating: () => void }) {
 
         <p className="eyebrow mt-7">One last step</p>
         <h1 className="h3 mt-3 text-ink">
-          We&#8217;re glad you had a good experience!
+          Would you share your experience on Google?
         </h1>
         <p className="mx-auto mt-5 max-w-lg text-lg leading-relaxed text-ink/80">
-          Reviews are how most people find us — a few words from you helps the
-          next family decide where to stay. And hearing it from a real guest
-          means far more than anything we could say about ourselves.
+          Right now those five stars live only with us. Posting them on Google
+          is what puts them in front of the next traveler deciding where to
+          stay. It only takes a moment, and we’d really appreciate it.
         </p>
 
         {/* The whole point of this screen: heavier than anything else here. */}
@@ -410,7 +406,13 @@ function FeedbackStep({
             Email
             <Required />
           </label>
-          <input id="email" name="email" type="email" required className={field} />
+          <input
+            id="email"
+            name="email"
+            type="email"
+            required
+            className={field}
+          />
         </div>
         <div>
           <label htmlFor="phone" className={labelClass}>
@@ -422,7 +424,12 @@ function FeedbackStep({
           <label htmlFor="stayType" className={labelClass}>
             What did you book?
           </label>
-          <select id="stayType" name="stayType" defaultValue="" className={field}>
+          <select
+            id="stayType"
+            name="stayType"
+            defaultValue=""
+            className={field}
+          >
             <option value="">Select one…</option>
             {STAY_TYPES.map((option) => (
               <option key={option} value={option}>
@@ -436,7 +443,13 @@ function FeedbackStep({
             What could we have done better?
             <Required />
           </label>
-          <textarea id="feedback" name="feedback" rows={5} required className={field} />
+          <textarea
+            id="feedback"
+            name="feedback"
+            rows={5}
+            required
+            className={field}
+          />
         </div>
 
         <button
@@ -552,7 +565,13 @@ function StarIcon({
 /** Google's four-color "G", inline so there is no icon library or remote asset. */
 function GoogleGlyph() {
   return (
-    <svg viewBox="0 0 48 48" width="22" height="22" aria-hidden className="shrink-0">
+    <svg
+      viewBox="0 0 48 48"
+      width="22"
+      height="22"
+      aria-hidden
+      className="shrink-0"
+    >
       <path
         fill="#4285F4"
         d="M45.12 24.5c0-1.56-.14-3.06-.4-4.5H24v8.51h11.84c-.51 2.75-2.06 5.08-4.39 6.64v5.52h7.11c4.16-3.83 6.56-9.47 6.56-16.17z"
