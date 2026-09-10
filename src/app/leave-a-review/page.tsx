@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { Container } from "@/components/ui";
 import { ReviewFlow } from "@/components/review-flow";
 
 /*
@@ -10,6 +9,10 @@ import { ReviewFlow } from "@/components/review-flow";
   page is neither. It is unlisted (absent from primaryNav, the footer and
   sitemap.ts) and marked noindex/nofollow — the only way in is the link the
   lodge sends.
+
+  ReviewFlow renders as a full-screen lightbox (fixed, over a dimmed home hero),
+  so it needs no Container or header clearance of its own — it covers the site
+  chrome, and its X returns home.
 */
 export const metadata: Metadata = {
   title: { absolute: "Leave a Review | Birch Glen Lodge" },
@@ -23,11 +26,5 @@ export const metadata: Metadata = {
 };
 
 export default function LeaveAReviewPage() {
-  return (
-    // The site header is fixed and transparent, so clear it with top padding
-    // the way Hero does (pt-44) — scaled down since there is no hero image.
-    <Container className="max-w-[720px] pb-20 pt-32 sm:pt-40">
-      <ReviewFlow />
-    </Container>
-  );
+  return <ReviewFlow />;
 }
