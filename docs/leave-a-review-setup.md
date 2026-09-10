@@ -196,13 +196,12 @@ route rejects a rating of 5 outright.
 | `src/app/leave-a-review/page.tsx` | The route + its `noindex` metadata |
 | `src/components/review-flow.tsx` | Star rating, the branch, both forms, the states |
 | `src/app/api/review-feedback/route.ts` | Validation + email/webhook delivery |
-| `src/lib/review.ts` | Rating labels and the "What did you book?" options |
+| `src/lib/review.ts` | Rating labels and the submission payload type |
 | `src/lib/site.ts` | `GOOGLE_REVIEW_URL`, phone, email |
 | `.env.example` | The variable names, with empty values |
 
-The "What did you book?" dropdown lists the five room types plus the four
-group/event categories the site sells. If the room lineup changes in
-`src/lib/content.ts`, update `STAY_TYPES` in `src/lib/review.ts` to match.
+The form collects first name, last name, email, an optional phone, and the
+required "What could we have done better?" note — plus the star rating.
 
 ---
 

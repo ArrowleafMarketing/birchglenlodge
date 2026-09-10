@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { GOOGLE_REVIEW_URL, site } from "@/lib/site";
-import { RATINGS, RATING_LABELS, STAY_TYPES, type Rating } from "@/lib/review";
+import { RATINGS, RATING_LABELS, type Rating } from "@/lib/review";
 import { ArrowRight } from "@/components/ui";
 
 /*
@@ -144,7 +144,6 @@ export function ReviewFlow() {
           lastName: data.get("lastName"),
           email: data.get("email"),
           phone: data.get("phone"),
-          stayType: data.get("stayType"),
           feedback: data.get("feedback"),
         }),
       });
@@ -419,24 +418,6 @@ function FeedbackStep({
             Phone
           </label>
           <input id="phone" name="phone" type="tel" className={field} />
-        </div>
-        <div>
-          <label htmlFor="stayType" className={labelClass}>
-            What did you book?
-          </label>
-          <select
-            id="stayType"
-            name="stayType"
-            defaultValue=""
-            className={field}
-          >
-            <option value="">Select one…</option>
-            {STAY_TYPES.map((option) => (
-              <option key={option} value={option}>
-                {option}
-              </option>
-            ))}
-          </select>
         </div>
         <div>
           <label htmlFor="feedback" className={labelClass}>

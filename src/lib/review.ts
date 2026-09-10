@@ -20,28 +20,6 @@ export const RATING_LABELS: Record<Rating, string> = {
   5: "Couldn't be happier",
 };
 
-/**
- * "What did you book?" options. Derived from what the lodge actually sells —
- * the five room types in lib/content.ts (roomsCarousel) plus the group/event
- * categories from the home "Perfect for Groups & Events" accordion — so the
- * answer is always something a guest could have booked. Keep in step with
- * content.ts if the room lineup or event list changes.
- */
-export const STAY_TYPES = [
-  "Royal King",
-  "Deluxe Double",
-  "Single Queen",
-  "Triple",
-  "Private Upstairs Suite",
-  "Wedding or Reception",
-  "Family Reunion",
-  "Corporate Retreat",
-  "Group Getaway",
-  "Other",
-] as const;
-
-export type StayType = (typeof STAY_TYPES)[number];
-
 /** The POST body accepted by /api/review-feedback/. */
 export type ReviewFeedbackPayload = {
   rating: Rating;
@@ -49,7 +27,6 @@ export type ReviewFeedbackPayload = {
   lastName: string;
   email: string;
   phone?: string;
-  stayType?: string;
   feedback: string;
 };
 

@@ -67,7 +67,6 @@ export async function POST(request: Request) {
   const lastName = str(raw.lastName, 100);
   const email = str(raw.email, 200);
   const phone = str(raw.phone, 50);
-  const stayType = str(raw.stayType, 100);
   const feedback = str(raw.feedback, 5000);
 
   const errors: string[] = [];
@@ -97,7 +96,6 @@ export async function POST(request: Request) {
     lastName,
     email,
     phone: phone || undefined,
-    stayType: stayType || undefined,
     feedback,
     ratingLabel: RATING_LABELS[rating!],
     receivedAt: new Date().toISOString(),
@@ -133,7 +131,6 @@ export async function POST(request: Request) {
       `Name: ${fullName}`,
       `Email: ${email}`,
       `Phone: ${phone || "—"}`,
-      `Booked: ${stayType || "—"}`,
       `Received: ${submission.receivedAt}`,
       "",
       "What could we have done better?",
@@ -148,7 +145,6 @@ export async function POST(request: Request) {
           <tr><td style="padding:4px 16px 4px 0"><strong>Name</strong></td><td style="padding:4px 0">${esc(fullName)}</td></tr>
           <tr><td style="padding:4px 16px 4px 0"><strong>Email</strong></td><td style="padding:4px 0"><a href="mailto:${esc(email)}">${esc(email)}</a></td></tr>
           <tr><td style="padding:4px 16px 4px 0"><strong>Phone</strong></td><td style="padding:4px 0">${esc(phone) || "&mdash;"}</td></tr>
-          <tr><td style="padding:4px 16px 4px 0"><strong>Booked</strong></td><td style="padding:4px 0">${esc(stayType) || "&mdash;"}</td></tr>
         </table>
         <p style="margin:0 0 6px"><strong>What could we have done better?</strong></p>
         <p style="margin:0 0 24px;white-space:pre-wrap">${esc(feedback)}</p>
