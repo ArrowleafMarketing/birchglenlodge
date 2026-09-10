@@ -13,6 +13,12 @@ const lastModified = new Date();
 // lodging brochure site (home highest, conversion pages next, legal lowest).
 // NOTE: /guide-to-cascade/, /trails/ and /rivers-lakes-hot-springs/ were retired
 // and now 30x-redirect to /explore-cascade/, so they are intentionally absent.
+//
+// EXCLUDED ROUTES — this list is an allowlist, so a route is excluded simply by
+// not appearing in it. Do not add:
+//   /leave-a-review/  private post-stay link sent to guests directly; it is
+//                     noindex/nofollow and must stay out of the sitemap and
+//                     out of the nav/footer.
 type Entry = {
   path: string;
   priority: number;

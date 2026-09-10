@@ -20,6 +20,18 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
+## Project docs
+
+- [Clone Blueprint](docs/CLONE-BLUEPRINT.md) — the build contract: section
+  order, colors, typography, per-page content.
+- [Leave a Review — setup & handover](docs/leave-a-review-setup.md) — the
+  private post-stay review page at `/leave-a-review/`. **Guest feedback is
+  currently logged and discarded** because email delivery isn't configured yet;
+  this doc is the walkthrough for turning it on.
+
+Environment variables are listed in [`.env.example`](.env.example). Copy it to
+`.env.local` and fill it in; never commit real keys.
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:

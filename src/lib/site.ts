@@ -47,6 +47,18 @@ export const site = {
 } as const;
 
 /*
+  Direct "write a review" deep link for the Google Business Profile. Lives here
+  (not inline in a component) so any future review CTA — a post-stay email, a
+  QR card in the rooms, a thank-you page — imports the same one value.
+
+  This is the real short link from the lodge's Business Profile ("Ask for
+  reviews" → copy link), which opens the star/review composer straight away.
+  To re-issue it: Google Business Profile → Read reviews → Get more reviews.
+*/
+export const GOOGLE_REVIEW_URL =
+  "https://g.page/r/CS_RePJEGSIWEBM/review" as const;
+
+/*
   Tenant key for the shared blog management system (Supabase `posts.site_key`).
   The blog reads only rows whose site_key matches this value, so it MUST be the
   exact key the CMS stores for Birch Glen. Change it here if the CMS uses a
